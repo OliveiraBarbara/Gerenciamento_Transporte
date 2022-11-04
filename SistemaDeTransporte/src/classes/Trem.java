@@ -4,10 +4,12 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author barbara
  */
-public class Trem extends Veiculo{
-    
+public class Trem extends Veiculo implements Serializable {
+
 }

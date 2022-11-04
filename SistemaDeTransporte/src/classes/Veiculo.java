@@ -4,10 +4,18 @@
  */
 package classes;
 
+import interfaces.VeiculoInterface;
+import java.io.Serializable;
+
 /**
  *
  * @author barbara
  */
-public class Veiculo {
-    
+public class Veiculo implements VeiculoInterface, Serializable {
+
+    @Override
+    public void calculaTempoMedio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

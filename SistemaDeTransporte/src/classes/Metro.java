@@ -4,10 +4,12 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author barbara
  */
-public class Metro extends Veiculo{
+public class Metro extends Veiculo implements Serializable{
     
 }

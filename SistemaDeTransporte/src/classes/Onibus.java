@@ -4,10 +4,12 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author barbara
  */
-public class Onibus extends Veiculo{
+public class Onibus extends Veiculo implements Serializable{
     
 }

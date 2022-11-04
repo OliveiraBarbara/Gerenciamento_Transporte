@@ -1,11 +1,26 @@
 package telas;
 
+import classes.Funcionario;
+import classes.Usuario;
+import io.Gravador;
+import io.LeitorGravadorObj;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeSet;
+
 public class Menu extends javax.swing.JFrame {
 
-    public Menu() {
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Funcionario> funcionarios;
+    private HashMap<String, TreeSet<String>> estadosCidades;
+
+    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.usuarios = usuarios;
+        this.estadosCidades = estadosCidades;
+        this.funcionarios = funcionarios;
     }
 
     @SuppressWarnings("unchecked")
@@ -355,15 +370,17 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
        
     private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
+        Gravador.gravarUsuario(new LeitorGravadorObj(), this.usuarios);
+        Gravador.gravarFuncionario(new LeitorGravadorObj(), this.funcionarios);
         System.exit(0);
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadUsuarioActionPerformed
-        new CadastroUsuario();
+       new CadastroUsuario(this.usuarios, this.estadosCidades);
     }//GEN-LAST:event_bCadUsuarioActionPerformed
 
     private void bCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadFuncActionPerformed
-        new CadastroFuncionario();
+        new CadastroFuncionario(this.funcionarios, this.estadosCidades);
     }//GEN-LAST:event_bCadFuncActionPerformed
 
     private void bCadRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadRotasActionPerformed

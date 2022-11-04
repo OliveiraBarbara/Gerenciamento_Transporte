@@ -4,8 +4,11 @@
  */
 package telas;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
+import classes.Funcionario;
+import classes.Usuario;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeSet;
 
 /**
  *
@@ -13,14 +16,20 @@ import javax.swing.ImageIcon;
  */
 public class Login extends javax.swing.JFrame {
 
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Funcionario> funcionarios;
+    private HashMap<String, TreeSet<String>> estadosCidades;
+
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
         this.setLocationRelativeTo(null);
-        //ImageIcon icone = new ImageIcon(getClass().getResource("/imagens/transporte.png"));
-        //this.lbIcone.setIcon(new ImageIcon(icone.getImage().getScaledInstance(this.lbIcone.getWidth(),this.lbIcone.getHeight(), Image.SCALE_DEFAULT)));
+        this.usuarios = usuarios;
+        this.funcionarios = funcionarios;
+        this.estadosCidades = estadosCidades;
+        
     }
 
     /**
@@ -154,7 +163,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAcessarActionPerformed
-        new Menu();
+        new Menu(this.usuarios, this.funcionarios, this.estadosCidades);
     }//GEN-LAST:event_bAcessarActionPerformed
 
     /**

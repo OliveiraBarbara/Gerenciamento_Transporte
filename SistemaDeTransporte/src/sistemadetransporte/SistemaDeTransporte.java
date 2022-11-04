@@ -4,7 +4,13 @@
  */
 package sistemadetransporte;
 
-
+import classes.Funcionario;
+import classes.Usuario;
+import io.Carregador;
+import io.LeitorGravadorObj;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeSet;
 import telas.Login;
 
 /**
@@ -17,15 +23,19 @@ public class SistemaDeTransporte {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        criarGUI();
+        ArrayList<Usuario> usuarios = Carregador.carregarUsuario(new LeitorGravadorObj());
+        ArrayList<Funcionario> funcionarios = Carregador.carregarFuncionario(new LeitorGravadorObj());
+        HashMap<String, TreeSet<String>> estadosCidades = Carregador.carregarEstadosCidades(new LeitorGravadorObj());
+        criarGUI(usuarios, funcionarios, estadosCidades);
     }
-    public static void criarGUI() {
 
-	/* Create and display the form */
-	java.awt.EventQueue.invokeLater(new Runnable() {
-	    public void run() {
-		new Login().setVisible(true);
-	    }
-	});
+    public static void criarGUI(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Login(usuarios, funcionarios, estadosCidades).setVisible(true);
+            }
+        });
     }
 }
