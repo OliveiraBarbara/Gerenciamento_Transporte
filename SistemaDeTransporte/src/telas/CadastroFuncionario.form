@@ -25,14 +25,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="hLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="hLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="331" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -115,7 +116,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lSalario" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tSalario" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="tSalario" min="-2" pref="82" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="lBarirro3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
@@ -212,8 +213,8 @@
                       <Component id="tSetor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lBarirro5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lBarirro3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -387,7 +388,6 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbUFItemStateChanged"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUFActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -492,12 +492,7 @@
             <Property name="text" type="java.lang.String" value="Sal&#xe1;rio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="tSalario">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0.00" subtype="-1" type="0"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="tSalario">
         </Component>
       </SubComponents>
     </Container>

@@ -1,7 +1,9 @@
 package telas;
 
 import classes.Funcionario;
+import classes.Linha;
 import classes.Usuario;
+import classes.Veiculo;
 import io.Gravador;
 import io.LeitorGravadorObj;
 import java.util.ArrayList;
@@ -12,15 +14,19 @@ public class Menu extends javax.swing.JFrame {
 
     private ArrayList<Usuario> usuarios;
     private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Veiculo> veiculos;
+    private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
 
-    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
+    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.usuarios = usuarios;
         this.estadosCidades = estadosCidades;
         this.funcionarios = funcionarios;
+        this.linhas = linhas;
+        this.veiculos = veiculos;
     }
 
     @SuppressWarnings("unchecked")
@@ -384,7 +390,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bCadFuncActionPerformed
 
     private void bCadRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadRotasActionPerformed
-        new CadastroRotas();
+        new CadastroRotas(this.linhas);
     }//GEN-LAST:event_bCadRotasActionPerformed
 
     private void bEdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdUsuarioActionPerformed
@@ -392,7 +398,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bEdUsuarioActionPerformed
 
     private void bEdFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdFuncActionPerformed
-        new EditFuncionario();
+        new EditFuncionario(this.funcionarios, this.estadosCidades);
     }//GEN-LAST:event_bEdFuncActionPerformed
 
     private void bEdRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdRotasActionPerformed
@@ -416,7 +422,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bEdVeiculoActionPerformed
 
     private void bCadVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadVeiculoActionPerformed
-        new CadastroVeiculo();
+        new CadastroVeiculo(this.veiculos);
     }//GEN-LAST:event_bCadVeiculoActionPerformed
 
     private void bRelatorioVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioVeiculoActionPerformed

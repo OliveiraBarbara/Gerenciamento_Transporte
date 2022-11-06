@@ -8,7 +8,6 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operacoes.CadastroFuncionarioOperacao;
-import operacoes.CadastroUsuarioOperacao;
 
 public class CadastroFuncionario extends javax.swing.JFrame {
 
@@ -65,7 +64,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         lBarirro5 = new javax.swing.JLabel();
         tSetor = new javax.swing.JFormattedTextField();
         lSalario = new javax.swing.JLabel();
-        tSalario = new javax.swing.JFormattedTextField();
+        tSalario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Transporte");
@@ -149,11 +148,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 cbUFItemStateChanged(evt);
             }
         });
-        cbUF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUFActionPerformed(evt);
-            }
-        });
 
         lCargo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lCargo.setText("Cargo:");
@@ -192,8 +186,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         lSalario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lSalario.setText("Salário:");
-
-        tSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,7 +229,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(lSalario)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lBarirro3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,8 +310,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addComponent(tSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lBarirro5)
                     .addComponent(lSalario)
-                    .addComponent(tSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lBarirro3))
+                    .addComponent(lBarirro3)
+                    .addComponent(tSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lBarirro2)
@@ -339,11 +331,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(hLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(hLabel)
+                        .addGap(0, 331, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -364,9 +356,12 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String cidade = (String) this.cbCidade.getSelectedItem();
         String estado = (String) this.cbUF.getSelectedItem();
         String cargo = (String) this.cbCargo.getSelectedItem();
+        int num = Integer.parseInt(this.tNumero.getText());
+        double salario = Double.parseDouble(this.tSalario.getText());
+        
         try {
-            CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, this.tCPF.getText(), cargo, this.tNome.getText(), Double.parseDouble(this.tSalario.getText()), 
-                                this.tSetor.getText(), this.tCnh.getText(), this.tTurno.getText(), this.tEspecialidade.getText(), this.tLocal.getText());
+            CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, this.tCPF.getText(), cargo, this.tNome.getText(), salario, 
+                                this.tSetor.getText(), this.tCnh.getText(), this.tTurno.getText(), this.tEspecialidade.getText(), this.tLocal.getText(), this.tEnd.getText(), num, this.tBairro.getText(), this.tCep.getText(), cidade, estado);
         } catch (ParseException ex) {
             Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -404,12 +399,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         this.carregarCidades(estado);
     }//GEN-LAST:event_cbUFItemStateChanged
 
-    private void cbUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbUFActionPerformed
-
     private void carregarCidades(String estado) {
-        System.out.println(estado);
         this.cbCidade.removeAllItems();
         for (String cidade : this.estadosCidades.get(estado)) {
             this.cbCidade.addItem(cidade);
@@ -458,7 +448,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tLocal;
     private javax.swing.JTextField tNome;
     private javax.swing.JFormattedTextField tNumero;
-    private javax.swing.JFormattedTextField tSalario;
+    private javax.swing.JTextField tSalario;
     private javax.swing.JFormattedTextField tSetor;
     private javax.swing.JTextField tTurno;
     // End of variables declaration//GEN-END:variables

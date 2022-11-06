@@ -14,8 +14,8 @@ public class Gerente extends Funcionario implements Serializable {
 
     private String setorResponsavel;
     
-    public Gerente(String cpf, String cargo, String nome, double salario, String setorResponsavel) {
-        super(cpf, cargo, nome, salario);
+    public Gerente(String cpf, String cargo, String nome, double salario, String endereco, int num, String bairro, String cep, String cidade, String uf, String setorResponsavel) {
+        super(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf);
         this.setorResponsavel = setorResponsavel;
     }
 

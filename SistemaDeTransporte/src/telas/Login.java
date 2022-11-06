@@ -5,7 +5,9 @@
 package telas;
 
 import classes.Funcionario;
+import classes.Linha;
 import classes.Usuario;
+import classes.Veiculo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -18,16 +20,20 @@ public class Login extends javax.swing.JFrame {
 
     private ArrayList<Usuario> usuarios;
     private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Veiculo> veiculos;
+    private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
 
     /**
      * Creates new form Login
      */
-    public Login(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
+    public Login(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.usuarios = usuarios;
         this.funcionarios = funcionarios;
+        this.veiculos = veiculos;
+        this.linhas = linhas;
         this.estadosCidades = estadosCidades;
         
     }
@@ -163,7 +169,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAcessarActionPerformed
-        new Menu(this.usuarios, this.funcionarios, this.estadosCidades);
+        new Menu(this.usuarios, this.funcionarios, this.veiculos, this.linhas, this.estadosCidades);
     }//GEN-LAST:event_bAcessarActionPerformed
 
     /**

@@ -5,7 +5,9 @@
 package sistemadetransporte;
 
 import classes.Funcionario;
+import classes.Linha;
 import classes.Usuario;
+import classes.Veiculo;
 import io.Carregador;
 import io.LeitorGravadorObj;
 import java.util.ArrayList;
@@ -25,16 +27,18 @@ public class SistemaDeTransporte {
     public static void main(String[] args) {
         ArrayList<Usuario> usuarios = Carregador.carregarUsuario(new LeitorGravadorObj());
         ArrayList<Funcionario> funcionarios = Carregador.carregarFuncionario(new LeitorGravadorObj());
+        ArrayList<Veiculo> veiculos = Carregador.carregarVeiculo(new LeitorGravadorObj());
+        ArrayList<Linha> linhas = Carregador.carregarLinha(new LeitorGravadorObj());
         HashMap<String, TreeSet<String>> estadosCidades = Carregador.carregarEstadosCidades(new LeitorGravadorObj());
-        criarGUI(usuarios, funcionarios, estadosCidades);
+        criarGUI(usuarios, funcionarios, veiculos, linhas, estadosCidades);
     }
 
-    public static void criarGUI(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
+    public static void criarGUI(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(usuarios, funcionarios, estadosCidades).setVisible(true);
+                new Login(usuarios, funcionarios, veiculos, linhas, estadosCidades).setVisible(true);
             }
         });
     }

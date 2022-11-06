@@ -15,8 +15,8 @@ public class Motorista extends Funcionario implements Serializable {
     private String cnh;
     private String turnoTrabalho;
     
-    public Motorista(String cpf, String cargo, String nome, double salario, String cnh, String turnoTrabalho) {
-        super(cpf, cargo, nome, salario);
+    public Motorista(String cpf, String cargo, String nome, double salario, String endereco, int num, String bairro, String cep, String cidade, String uf, String cnh, String turnoTrabalho) {
+        super(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf);
         this.cnh = cnh;
         this.turnoTrabalho = turnoTrabalho;
     }

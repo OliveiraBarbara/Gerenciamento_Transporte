@@ -5,6 +5,7 @@
 package classes;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -12,16 +13,83 @@ import java.io.Serializable;
  */
 public class Funcionario implements Serializable {
 
+    private String idFunc;
     private String cpf;
     private String cargo;
     private String nome;
     private double salario;
+    private String endereco;
+    private int num;
+    private String bairro;
+    private String cep;
+    private String cidade;
+    private String uf;
 
-    public Funcionario(String cpf, String cargo, String nome, double salario) {
+    public Funcionario(String cpf, String cargo, String nome, double salario, String endereco, int num, String bairro, String cep, String cidade, String uf) {
+        UUID uuid = UUID.randomUUID();
+        this.idFunc = uuid.toString();
         this.cpf = cpf;
         this.cargo = cargo;
         this.nome = nome;
         this.salario = salario;
+        this.endereco = endereco;
+        this.num = num;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+
+    public String getIdFunc() {
+        return idFunc;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public String getCpf() {

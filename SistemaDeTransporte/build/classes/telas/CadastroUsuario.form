@@ -94,7 +94,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lBarirro4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tDataDeNasc" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="tDataDeNasc" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="bCadastrar" min="-2" max="-2" attributes="0"/>

@@ -5,31 +5,29 @@
 package classes;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
  * @author Vini_
  */
-public class Linha implements Serializable {
+public class Linha implements Serializable, Comparable<Linha> {
 
-    private int idLinha;
+    private String idLinha;
     private String pontoInicial;
     private String pontoFinal;
     private String endereco;
 
-    public Linha(int idLinha, String pontoInicial, String pontoFinal, String endereco) {
-        this.idLinha = idLinha;
+    public Linha(String pontoInicial, String pontoFinal, String endereco) {
+        UUID uuid = UUID.randomUUID();
+        this.idLinha = uuid.toString();
         this.pontoInicial = pontoInicial;
         this.pontoFinal = pontoFinal;
         this.endereco = endereco;
     }
 
-    public int getIdLinha() {
+    public String getIdLinha() {
         return idLinha;
-    }
-
-    public void setIdLinha(int idLinha) {
-        this.idLinha = idLinha;
     }
 
     public String getPontoInicial() {
@@ -54,6 +52,11 @@ public class Linha implements Serializable {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public int compareTo(Linha l) {
+        return this.idLinha.compareTo(l.getIdLinha());
     }
 
 }
