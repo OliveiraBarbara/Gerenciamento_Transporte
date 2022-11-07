@@ -17,6 +17,7 @@ public class Menu extends javax.swing.JFrame {
     private ArrayList<Veiculo> veiculos;
     private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
+    private Funcionario funcionario;
 
     public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
@@ -386,7 +387,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bCadUsuarioActionPerformed
 
     private void bCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadFuncActionPerformed
-        new CadastroFuncionario(this.funcionarios, this.estadosCidades);
+        new CadastroFuncionario(this.funcionarios, this.estadosCidades, funcionario);
     }//GEN-LAST:event_bCadFuncActionPerformed
 
     private void bCadRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadRotasActionPerformed

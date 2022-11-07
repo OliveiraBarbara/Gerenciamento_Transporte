@@ -18,6 +18,7 @@ public class Funcionario implements Serializable {
     private String cargo;
     private String nome;
     private double salario;
+    private String telefone;
     private String endereco;
     private int num;
     private String bairro;
@@ -25,13 +26,14 @@ public class Funcionario implements Serializable {
     private String cidade;
     private String uf;
 
-    public Funcionario(String cpf, String cargo, String nome, double salario, String endereco, int num, String bairro, String cep, String cidade, String uf) {
+    public Funcionario(String cpf, String cargo, String nome, double salario, String telefone, String endereco, int num, String bairro, String cep, String cidade, String uf) {
         UUID uuid = UUID.randomUUID();
         this.idFunc = uuid.toString();
         this.cpf = cpf;
         this.cargo = cargo;
         this.nome = nome;
         this.salario = salario;
+        this.telefone = telefone;
         this.endereco = endereco;
         this.num = num;
         this.bairro = bairro;
@@ -122,6 +124,14 @@ public class Funcionario implements Serializable {
 
     public void setSalario(double salario) {
         this.salario = salario;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
 }

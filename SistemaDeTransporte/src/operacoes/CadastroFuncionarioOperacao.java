@@ -20,20 +20,20 @@ import javax.swing.JOptionPane;
  */
 public class CadastroFuncionarioOperacao {
     
-    public static void cadastroFuncionario(ArrayList<Funcionario> funcionarios, String cpf, String cargo, String nome, double salario, String setorResponsável, String cnh, String turnoTrabalho, String especialidade, String localAtendimento, String endereco, int num, String bairro, String cep, String cidade, String uf) throws ParseException {
+    public static void cadastroFuncionario(ArrayList<Funcionario> funcionarios, String cpf, String cargo, String nome, double salario, String telefone, String setorResponsável, String cnh, String turnoTrabalho, String especialidade, String localAtendimento, String endereco, int num, String bairro, String cep, String cidade, String uf) throws ParseException {
         switch (cargo.toLowerCase()) {
             case "motorista":
-                Motorista motorista = new Motorista(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf, cnh, turnoTrabalho);
+                Motorista motorista = new Motorista(cpf, cargo, nome, salario, telefone, endereco, num, bairro, cep, cidade, uf, cnh, turnoTrabalho);
                 funcionarios.add(motorista);
                 JOptionPane.showConfirmDialog(null, "Cadastrado com sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
                 break;
             case "secretária":
-                Secretaria secretaria = new Secretaria(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf, especialidade, localAtendimento);
+                Secretaria secretaria = new Secretaria(cpf, cargo, nome, salario, telefone, endereco, num, bairro, cep, cidade, uf, especialidade, localAtendimento);
                 funcionarios.add(secretaria);
                 JOptionPane.showConfirmDialog(null, "Cadastrado com sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
                 break;
             case "gerente":
-                Gerente gerente = new Gerente(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf, setorResponsável);
+                Gerente gerente = new Gerente(cpf, cargo, nome, salario, telefone, endereco, num, bairro, cep, cidade, uf, setorResponsável);
                 funcionarios.add(gerente);
                 JOptionPane.showConfirmDialog(null, "Cadastrado com sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
                 break;

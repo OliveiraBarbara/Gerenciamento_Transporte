@@ -13,14 +13,20 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
     private ArrayList<Funcionario> funcionarios;
     private HashMap<String, TreeSet<String>> estadosCidades;
+    private Funcionario funcionario;
 
-    public CadastroFuncionario(ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades) {
+    public CadastroFuncionario(ArrayList<Funcionario> funcionarios, HashMap<String, TreeSet<String>> estadosCidades, Funcionario funcionario) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
         this.estadosCidades = estadosCidades;
         this.funcionarios = funcionarios;
+        this.funcionario = funcionario;
+        
+        if(this.funcionario != null){
+            this.carregarDados();
+        }
         
         carregarEstados();
     }
@@ -358,9 +364,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String cargo = (String) this.cbCargo.getSelectedItem();
         int num = Integer.parseInt(this.tNumero.getText());
         double salario = Double.parseDouble(this.tSalario.getText());
-        
+        System.out.println(cidade + estado);
         try {
-            CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, this.tCPF.getText(), cargo, this.tNome.getText(), salario, 
+            CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, this.tCPF.getText(), cargo, this.tNome.getText(), salario, this.tFone.getText(),
                                 this.tSetor.getText(), this.tCnh.getText(), this.tTurno.getText(), this.tEspecialidade.getText(), this.tLocal.getText(), this.tEnd.getText(), num, this.tBairro.getText(), this.tCep.getText(), cidade, estado);
         } catch (ParseException ex) {
             Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -412,6 +418,24 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         for (String estado : estados) {
             this.cbUF.addItem(estado);
         }
+    }
+    
+    private void carregarDados() {
+        this.cbCargo.setSelectedItem(this.funcionario.getCargo());
+        this.tNome.setText(this.funcionario.getNome());
+        this.tCPF.setText(this.funcionario.getCpf());
+        this.tFone.setText(this.funcionario.getTelefone());
+        
+        this.tEnd.setText(this.funcionario.getEndereco());
+        this.tNumero.setText(""+this.funcionario.getNum());
+        this.tBairro.setText(this.funcionario.getBairro());
+        this.tCep.setText(this.funcionario.getCep());
+        this.cbCidade.setSelectedItem(this.funcionario.getCidade());
+        this.cbUF.setSelectedItem(this.funcionario.getUf());
+        
+        
+        this.tSalario.setText(""+this.funcionario.getSalario());
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

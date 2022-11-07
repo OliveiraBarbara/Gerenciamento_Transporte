@@ -15,8 +15,8 @@ public class Secretaria extends Funcionario implements Serializable {
     private String especialidade;
     private String localAtendimento;
     
-    public Secretaria(String cpf, String cargo, String nome, double salario, String endereco, int num, String bairro, String cep, String cidade, String uf, String especialidade, String localAtendimento) {
-        super(cpf, cargo, nome, salario, endereco, num, bairro, cep, cidade, uf);
+    public Secretaria(String cpf, String cargo, String nome, double salario, String telefone, String endereco, int num, String bairro, String cep, String cidade, String uf, String especialidade, String localAtendimento) {
+        super(cpf, cargo, nome, salario, telefone, endereco, num, bairro, cep, cidade, uf);
         this.especialidade = especialidade;
         this.localAtendimento = localAtendimento;
     }

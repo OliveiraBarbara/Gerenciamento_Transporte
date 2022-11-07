@@ -346,14 +346,14 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
             modelo.removeRow(0);
         }
 
-        /*String cpf = this.tCPF.getText().toLowerCase();
+        String cpf = this.tCPF.getText().toLowerCase();
         String nome = this.tNome.getText().toLowerCase();
-        String cargo = (String) this.cbCargo.getSelectedItem();*/
+        String cargo = (String) this.cbCargo.getSelectedItem();
         for (Funcionario funcionario : this.funcionarios) {
-            //if ((nome.isBlank() || funcionario.getNome().toLowerCase().contains(nome)) && (cpf.isBlank() || funcionario.getCpf().contains(cpf)) && (cargo == null || cargo.equals("Selecione") || funcionario.getCargo().contains(cargo))) {
-            Object[] row = {funcionario.getIdFunc(), funcionario.getCpf(), funcionario.getNome(), funcionario.getCargo(), funcionario.getSalario(), funcionario.getUf()};
-            modelo.addRow(row);
-            //}
+            if ((nome.isBlank() || funcionario.getNome().toLowerCase().contains(nome)) && (cpf.isBlank() || funcionario.getCpf().contains(cpf)) && (cargo == null || cargo.equals("Selecione") || funcionario.getCargo().contains(cargo))) {
+                Object[] row = {funcionario.getIdFunc(), funcionario.getCpf(), funcionario.getNome(), funcionario.getCargo(), funcionario.getSalario(), funcionario.getUf()};
+                modelo.addRow(row);
+            }
         }
     }
 }

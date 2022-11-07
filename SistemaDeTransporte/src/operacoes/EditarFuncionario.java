@@ -19,7 +19,7 @@ public class EditarFuncionario {
     public static void editarFuncionario(ArrayList<Funcionario> funcionarios, String id, HashMap<String, TreeSet<String>> estadosCidades) {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getIdFunc().equals(id)) {
-                new CadastroFuncionario(funcionarios, estadosCidades);
+                new CadastroFuncionario(funcionarios, estadosCidades, funcionario);
                 break;
             }
         }
