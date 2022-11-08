@@ -1,11 +1,28 @@
 package telas;
 
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 public class EditVeiculo extends javax.swing.JFrame {
 
     public EditVeiculo() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
+        this.tabelaVeiculo.getColumnModel().getColumn(0).setMinWidth(0);
+        this.tabelaVeiculo.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        this.tabelaVeiculo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tabelaVeiculo.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                bRemover.setEnabled(tabelaVeiculo.getSelectedRow() >= 0);
+                bEditar.setEnabled(tabelaVeiculo.getSelectedRow() >= 0);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -15,11 +32,11 @@ public class EditVeiculo extends javax.swing.JFrame {
         bgAcessivel = new javax.swing.ButtonGroup();
         pTabela = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tVeiculo = new javax.swing.JTable();
+        tabelaVeiculo = new javax.swing.JTable();
         pBotoes = new javax.swing.JPanel();
         bFechar = new javax.swing.JButton();
         bEditar = new javax.swing.JButton();
-        bBuscar = new javax.swing.JButton();
+        bRemover = new javax.swing.JButton();
         lTitulo = new javax.swing.JLabel();
         pCampo = new javax.swing.JPanel();
         lCapacidade = new javax.swing.JLabel();
@@ -34,20 +51,20 @@ public class EditVeiculo extends javax.swing.JFrame {
         setTitle("Sistema de Transporte");
         setResizable(false);
 
-        tVeiculo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tVeiculo.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVeiculo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tabelaVeiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tipo", "Data Aquisição", "Capacidade", "Acessibilidade"
+                "id", "Tipo", "Data Aquisição", "Capacidade", "Acessibilidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -58,7 +75,7 @@ public class EditVeiculo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tVeiculo);
+        jScrollPane1.setViewportView(tabelaVeiculo);
 
         javax.swing.GroupLayout pTabelaLayout = new javax.swing.GroupLayout(pTabela);
         pTabela.setLayout(pTabelaLayout);
@@ -95,12 +112,13 @@ public class EditVeiculo extends javax.swing.JFrame {
             }
         });
 
-        bBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/productBusca.png"))); // NOI18N
-        bBuscar.setText("Buscar");
-        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+        bRemover.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/trash-bin.png"))); // NOI18N
+        bRemover.setText("Remover");
+        bRemover.setEnabled(false);
+        bRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBuscarActionPerformed(evt);
+                bRemoverActionPerformed(evt);
             }
         });
 
@@ -110,7 +128,7 @@ public class EditVeiculo extends javax.swing.JFrame {
             pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bBuscar)
+                .addComponent(bRemover)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,7 +142,7 @@ public class EditVeiculo extends javax.swing.JFrame {
                 .addGroup(pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -216,10 +234,6 @@ public class EditVeiculo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-
-    }//GEN-LAST:event_bBuscarActionPerformed
-
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
 
     }//GEN-LAST:event_bEditarActionPerformed
@@ -228,10 +242,25 @@ public class EditVeiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bFecharActionPerformed
 
+    private void bRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverActionPerformed
+        int linha = this.tabelaVeiculo.getSelectedRow();
+        int resposta = JOptionPane.showConfirmDialog(null, "Confirma a exclusão", "Exclusão", JOptionPane.YES_NO_OPTION);
+        if (linha >= 0 && resposta == 0) {
+            String idVeiculo = this.tabelaVeiculo.getValueAt(linha, 0).toString();
+            /*for (Funcionario funcionario : this.funcionarios) {
+                if (funcionario.getIdFunc().equals(idFunc)) {
+                    this.funcionarios.remove(funcionario);
+                    this.carregarDados();
+                    break;
+                }
+            }*/
+        }
+    }//GEN-LAST:event_bRemoverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEditar;
     private javax.swing.JButton bFechar;
+    private javax.swing.JButton bRemover;
     private javax.swing.ButtonGroup bgAcessivel;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JScrollPane jScrollPane1;
@@ -245,6 +274,6 @@ public class EditVeiculo extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbNao;
     private javax.swing.JRadioButton rbSim;
     private javax.swing.JSpinner sCapacidade;
-    private javax.swing.JTable tVeiculo;
+    private javax.swing.JTable tabelaVeiculo;
     // End of variables declaration//GEN-END:variables
 }

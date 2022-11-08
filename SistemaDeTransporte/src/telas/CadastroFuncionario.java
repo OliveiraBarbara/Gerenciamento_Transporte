@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operacoes.CadastroFuncionarioOperacao;
+import operacoes.CarregarDados;
 
 public class CadastroFuncionario extends javax.swing.JFrame {
 
@@ -28,7 +29,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             this.carregarDados();
         }
         
-        carregarEstados();
+        CarregarDados.carregarEstados(this.cbUF, this.estadosCidades);
     }
 
     @SuppressWarnings("unchecked")
@@ -336,12 +337,12 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(hLabel)
-                        .addGap(0, 331, Short.MAX_VALUE)))
+                        .addGap(0, 337, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -364,13 +365,39 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String cargo = (String) this.cbCargo.getSelectedItem();
         int num = Integer.parseInt(this.tNumero.getText());
         double salario = Double.parseDouble(this.tSalario.getText());
-        System.out.println(cidade + estado);
-        try {
-            CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, this.tCPF.getText(), cargo, this.tNome.getText(), salario, this.tFone.getText(),
-                                this.tSetor.getText(), this.tCnh.getText(), this.tTurno.getText(), this.tEspecialidade.getText(), this.tLocal.getText(), this.tEnd.getText(), num, this.tBairro.getText(), this.tCep.getText(), cidade, estado);
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        String cpf = this.tCPF.getText();
+        String nome = this.tNome.getText();
+        String telefone = this.tFone.getText();
+        String setor = this.tSetor.getText();
+        String cnh = this.tCnh.getText();
+        String turno = this.tTurno.getText();
+        String especialidade = this.tEspecialidade.getText();
+        String local = this.tLocal.getText();
+        String endereco = this.tEnd.getText();
+        String bairro = this.tBairro.getText();
+        String cep = this.tCep.getText();
+        
+        if(funcionario == null){
+            try {
+                CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, cpf, cargo, nome, salario, telefone, setor, cnh, turno, especialidade, local, endereco, num, bairro, cep, cidade, estado);
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            this.funcionario.setNome(nome);
+            this.funcionario.setCpf(cpf);
+            this.funcionario.setCargo(cargo);
+            this.funcionario.setTelefone(telefone);
+            this.funcionario.setSalario(salario);
+            this.funcionario.setEndereco(endereco);
+            this.funcionario.setNum(num);
+            this.funcionario.setBairro(bairro);
+            this.funcionario.setCep(cep);
+            this.funcionario.setCidade(cidade);
+            this.funcionario.setUf(estado);
         }
+        
+        
         this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -402,23 +429,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
     private void cbUFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbUFItemStateChanged
         String estado = (String) evt.getItem();
-        this.carregarCidades(estado);
+        CarregarDados.carregarCidades(estado, this.cbCidade, this.estadosCidades);
     }//GEN-LAST:event_cbUFItemStateChanged
-
-    private void carregarCidades(String estado) {
-        this.cbCidade.removeAllItems();
-        for (String cidade : this.estadosCidades.get(estado)) {
-            this.cbCidade.addItem(cidade);
-        }
-    }
-
-    private void carregarEstados() {
-        this.cbUF.removeAllItems();
-        TreeSet<String> estados = new TreeSet<String>(this.estadosCidades.keySet());
-        for (String estado : estados) {
-            this.cbUF.addItem(estado);
-        }
-    }
     
     private void carregarDados() {
         this.cbCargo.setSelectedItem(this.funcionario.getCargo());
@@ -432,8 +444,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         this.tCep.setText(this.funcionario.getCep());
         this.cbCidade.setSelectedItem(this.funcionario.getCidade());
         this.cbUF.setSelectedItem(this.funcionario.getUf());
-        
-        
+
         this.tSalario.setText(""+this.funcionario.getSalario());
     
     }

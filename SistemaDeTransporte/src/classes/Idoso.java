@@ -15,8 +15,8 @@ public class Idoso extends Usuario implements Serializable {
 
     private Date dataNasc;
 
-    public Idoso(Date dataNasc, String cpf, String nome, String endereco, String cidade, String telefone, String tipo) {
-        super(cpf, nome, endereco, cidade, telefone, tipo);
+    public Idoso(Date dataNasc, String cpf, String nome, String endereco, int num, String bairro, String cep, String cidade, String estado, String telefone, String tipo) {
+        super(cpf, nome, endereco, num, bairro, cep, cidade, estado, telefone, tipo);
         this.dataNasc = dataNasc;
     }
 

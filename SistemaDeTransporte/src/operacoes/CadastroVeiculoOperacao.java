@@ -44,9 +44,6 @@ public class CadastroVeiculoOperacao {
                 break;
 
         }
-        for (Veiculo veiculo : veiculos) {
-            System.out.println(veiculo.getTipo() + "; " + veiculo.getAcessibilidade());
-        }
         Gravador.gravarVeiculo(new LeitorGravadorObj(), veiculos);
     }
 }

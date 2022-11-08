@@ -18,6 +18,7 @@ public class Menu extends javax.swing.JFrame {
     private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
     private Funcionario funcionario;
+    private Usuario usuario;
 
     public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
@@ -383,7 +384,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadUsuarioActionPerformed
-       new CadastroUsuario(this.usuarios, this.estadosCidades);
+       new CadastroUsuario(this.usuarios, this.estadosCidades, this.usuario);
     }//GEN-LAST:event_bCadUsuarioActionPerformed
 
     private void bCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadFuncActionPerformed
@@ -395,7 +396,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bCadRotasActionPerformed
 
     private void bEdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdUsuarioActionPerformed
-        new EditUsuario();
+        new EditUsuario(this.usuarios, this.estadosCidades);
     }//GEN-LAST:event_bEdUsuarioActionPerformed
 
     private void bEdFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdFuncActionPerformed

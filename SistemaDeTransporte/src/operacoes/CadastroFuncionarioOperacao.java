@@ -42,9 +42,6 @@ public class CadastroFuncionarioOperacao {
                 break;
 
         }
-        for (Funcionario funcionario : funcionarios) {
-            System.out.println(funcionario.getNome());
-        }
         Gravador.gravarFuncionario(new LeitorGravadorObj(), funcionarios);
     }
     

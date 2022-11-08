@@ -6,6 +6,7 @@ package classes;
 
 import interfaces.UsuarioInterface;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -13,20 +14,35 @@ import java.io.Serializable;
  */
 public class Usuario implements UsuarioInterface, Serializable {
 
+    private String idUser;
     private String cpf;
     private String nome;
     private String endereco;
+    private int num;
+    private String bairro;
+    private String cep;
+    private String estado;
     private String cidade;
     private String telefone;
     private String tipo;
 
-    public Usuario(String cpf, String nome, String endereco, String cidade, String telefone, String tipo) {
+    public Usuario(String cpf, String nome, String endereco, int num, String bairro, String cep, String cidade, String estado, String telefone, String tipo) {
+        UUID uuid = UUID.randomUUID();
+        this.idUser = uuid.toString();
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
+        this.num = num;
+        this.bairro = bairro;
+        this.cep = cep;
         this.cidade = cidade;
+        this.estado = estado;
         this.telefone = telefone;
         this.tipo = tipo;
+    }
+
+    public String getIdUser() {
+        return idUser;
     }
 
     public String getCpf() {
@@ -51,6 +67,38 @@ public class Usuario implements UsuarioInterface, Serializable {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getCidade() {

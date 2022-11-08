@@ -1,11 +1,31 @@
 package telas;
 
+import classes.Funcionario;
+import classes.Linha;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 public class EditRotas extends javax.swing.JFrame {
 
     public EditRotas() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
+        this.tabelaRotas.getColumnModel().getColumn(0).setMinWidth(0);
+        this.tabelaRotas.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        this.tabelaRotas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tabelaRotas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                bRemover.setEnabled(tabelaRotas.getSelectedRow() >= 0);
+                bEditar.setEnabled(tabelaRotas.getSelectedRow() >= 0);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -14,11 +34,11 @@ public class EditRotas extends javax.swing.JFrame {
 
         pTabela = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tRotas = new javax.swing.JTable();
+        tabelaRotas = new javax.swing.JTable();
         pBotoes = new javax.swing.JPanel();
         bFechar = new javax.swing.JButton();
         bEditar = new javax.swing.JButton();
-        bBuscar = new javax.swing.JButton();
+        bRemover = new javax.swing.JButton();
         lTitulo = new javax.swing.JLabel();
         pCampo = new javax.swing.JPanel();
         lCPF = new javax.swing.JLabel();
@@ -30,20 +50,20 @@ public class EditRotas extends javax.swing.JFrame {
         setTitle("Sistema de Transporte");
         setResizable(false);
 
-        tRotas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tRotas.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRotas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tabelaRotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Ponto Inicial", "Ponto Final", "Horário de Saída"
+                "id", "Ponto Inicial", "Ponto Final", "Horário de Saída"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -54,7 +74,7 @@ public class EditRotas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tRotas);
+        jScrollPane1.setViewportView(tabelaRotas);
 
         javax.swing.GroupLayout pTabelaLayout = new javax.swing.GroupLayout(pTabela);
         pTabela.setLayout(pTabelaLayout);
@@ -91,12 +111,13 @@ public class EditRotas extends javax.swing.JFrame {
             }
         });
 
-        bBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/productBusca.png"))); // NOI18N
-        bBuscar.setText("Buscar");
-        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+        bRemover.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/trash-bin.png"))); // NOI18N
+        bRemover.setText("Remover");
+        bRemover.setEnabled(false);
+        bRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBuscarActionPerformed(evt);
+                bRemoverActionPerformed(evt);
             }
         });
 
@@ -106,7 +127,7 @@ public class EditRotas extends javax.swing.JFrame {
             pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bBuscar)
+                .addComponent(bRemover)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,7 +141,7 @@ public class EditRotas extends javax.swing.JFrame {
                 .addGroup(pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -192,10 +213,6 @@ public class EditRotas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-
-    }//GEN-LAST:event_bBuscarActionPerformed
-
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
 
     }//GEN-LAST:event_bEditarActionPerformed
@@ -204,10 +221,25 @@ public class EditRotas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bFecharActionPerformed
 
+    private void bRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverActionPerformed
+        int linha = this.tabelaRotas.getSelectedRow();
+        int resposta = JOptionPane.showConfirmDialog(null, "Confirma a exclusão", "Exclusão", JOptionPane.YES_NO_OPTION);
+        if (linha >= 0 && resposta == 0) {
+            String idRota = this.tabelaRotas.getValueAt(linha, 0).toString();
+            /*for (Funcionario funcionario : this.funcionarios) {
+                if (funcionario.getIdFunc().equals(idFunc)) {
+                    this.funcionarios.remove(funcionario);
+                    this.carregarDados();
+                    break;
+                }
+            }*/
+        }
+    }//GEN-LAST:event_bRemoverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEditar;
     private javax.swing.JButton bFechar;
+    private javax.swing.JButton bRemover;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lCPF;
     private javax.swing.JLabel lCPF1;
@@ -217,6 +249,25 @@ public class EditRotas extends javax.swing.JFrame {
     private javax.swing.JPanel pTabela;
     private javax.swing.JTextField tNome;
     private javax.swing.JTextField tNome1;
-    private javax.swing.JTable tRotas;
+    private javax.swing.JTable tabelaRotas;
     // End of variables declaration//GEN-END:variables
+
+    /*private void carregarDados() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tabelaRotas.getModel();
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        String cpf = this.tCPF.getText().toLowerCase();
+        String nome = this.tNome.getText().toLowerCase();
+        String cargo = (String) this.cbCargo.getSelectedItem();
+        for (Linha linha : this.linhas) {
+            if ((nome.isBlank() || funcionario.getNome().toLowerCase().contains(nome)) && (cpf.isBlank() || funcionario.getCpf().contains(cpf)) && (cargo == null || cargo.equals("Selecione") || funcionario.getCargo().contains(cargo))) {
+                Object[] row = {funcionario.getIdFunc(), funcionario.getCpf(), funcionario.getNome(), funcionario.getCargo(), funcionario.getSalario(), funcionario.getUf()};
+                modelo.addRow(row);
+            }
+        }
+    }*/
+
 }

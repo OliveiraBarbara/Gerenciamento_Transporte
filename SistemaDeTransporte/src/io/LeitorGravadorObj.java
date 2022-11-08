@@ -50,8 +50,6 @@ public class LeitorGravadorObj implements LeituraGravacao {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
-
-        System.out.println("Dados gravados com sucesso!!!");
     }
 
     @Override
@@ -140,8 +138,6 @@ public class LeitorGravadorObj implements LeituraGravacao {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
-
-        System.out.println("Dados gravados com sucesso!!!");
     }
 
     @Override
@@ -190,8 +186,6 @@ public class LeitorGravadorObj implements LeituraGravacao {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
-
-        System.out.println("Dados gravados com sucesso!!!");
     }
 
     @Override
@@ -240,8 +234,6 @@ public class LeitorGravadorObj implements LeituraGravacao {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
-
-        System.out.println("Dados gravados com sucesso!!!");
     }
 
     @Override

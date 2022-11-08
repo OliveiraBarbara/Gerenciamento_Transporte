@@ -94,7 +94,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lBarirro4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tDataDeNasc" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="tDataNasc" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="bCadastrar" min="-2" max="-2" attributes="0"/>
@@ -197,7 +197,7 @@
                       <Component id="lBarirro2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tMatriculaEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lBarirro4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tDataDeNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -379,10 +379,11 @@
         <Component class="javax.swing.JComboBox" name="cbTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="4">
                 <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Estudante"/>
-                <StringItem index="2" value="Idoso"/>
+                <StringItem index="1" value="Comum"/>
+                <StringItem index="2" value="Estudante"/>
+                <StringItem index="3" value="Idoso"/>
               </StringArray>
             </Property>
           </Properties>
@@ -419,7 +420,7 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="tDataDeNasc">
+        <Component class="javax.swing.JFormattedTextField" name="tDataNasc">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##/##/####" subtype="-1" type="5"/>

@@ -8,19 +8,28 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operacoes.CadastroUsuarioOperacao;
+import operacoes.CarregarDados;
 
 public class CadastroUsuario extends javax.swing.JFrame {
 
     private ArrayList<Usuario> usuarios;
     private HashMap<String, TreeSet<String>> estadosCidades;
+    private Usuario usuario;
 
-    public CadastroUsuario(ArrayList<Usuario> usuarios, HashMap<String, TreeSet<String>> estadosCidades) {
+    public CadastroUsuario(ArrayList<Usuario> usuarios, HashMap<String, TreeSet<String>> estadosCidades, Usuario usuario) {
         this.usuarios = usuarios;
         this.estadosCidades = estadosCidades;
+        this.usuario = usuario;
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        carregarEstados();
+        
+        if(this.usuario != null){
+            this.carregarDados();
+        }
+        
+        CarregarDados.carregarEstados(this.cbUF, this.estadosCidades);
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +64,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tValeTransporte = new javax.swing.JTextField();
         lBarirro3 = new javax.swing.JLabel();
         tLocalEstudo = new javax.swing.JTextField();
-        tDataDeNasc = new javax.swing.JFormattedTextField();
+        tDataNasc = new javax.swing.JFormattedTextField();
         lBarirro4 = new javax.swing.JLabel();
         tMatriculaEscolar = new javax.swing.JTextField();
         lBarirro2 = new javax.swing.JLabel();
@@ -146,7 +155,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         lTipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lTipo.setText("Tipo:");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Estudante", "Idoso" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Comum", "Estudante", "Idoso" }));
         cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoActionPerformed(evt);
@@ -164,11 +173,11 @@ public class CadastroUsuario extends javax.swing.JFrame {
         tLocalEstudo.setEnabled(false);
 
         try {
-            tDataDeNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tDataDeNasc.setEnabled(false);
+        tDataNasc.setEnabled(false);
 
         lBarirro4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lBarirro4.setText("Data de Nascimento:");
@@ -200,7 +209,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lBarirro4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tDataDeNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(bCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,7 +298,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                     .addComponent(lBarirro2)
                     .addComponent(tMatriculaEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lBarirro4)
-                    .addComponent(tDataDeNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,14 +333,37 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        String cpf = this.tCPF.getText();
+        String nome = this.tNome.getText();
+        String telefone = this.tFone.getText();
         String cidade = (String) this.cbCidade.getSelectedItem();
-        //String estado = (String) this.cbUF.getSelectedItem();
+        String estado = (String) this.cbUF.getSelectedItem();
         String tipo = (String) this.cbTipo.getSelectedItem();
-        try {
-            CadastroUsuarioOperacao.cadastroUsuario(this.usuarios, this.tCPF.getText(), this.tNome.getText(), this.tEnd.getText(), cidade,
-                    this.tFone.getText(), tipo, this.tDataDeNasc.getText(), this.tLocalEstudo.getText(), this.tMatriculaEscolar.getText(), this.tValeTransporte.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        String endereco = this.tEnd.getText();
+        int num = Integer.parseInt(this.tNumero.getText());
+        String bairro = this.tBairro.getText();
+        String cep = this.tCep.getText();
+        String local = this.tLocalEstudo.getText();
+        String matricula = this.tMatriculaEscolar.getText();
+        String vale = this.tValeTransporte.getText();
+        
+        if(usuario == null){
+            try {
+                CadastroUsuarioOperacao.cadastroUsuario(this.usuarios, cpf, nome, endereco, num, bairro, cep, cidade, estado, telefone, tipo, this.tDataNasc.getText(), local, matricula, vale);
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            this.usuario.setNome(nome);
+            this.usuario.setCpf(cpf);
+            this.usuario.setTipo(tipo);
+            this.usuario.setTelefone(telefone);
+            this.usuario.setEndereco(endereco);
+            this.usuario.setNum(num);
+            this.usuario.setBairro(bairro);
+            this.usuario.setCep(cep);
+            this.usuario.setCidade(cidade);
+            this.usuario.setEstado(estado);
         }
         this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
@@ -342,42 +374,40 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
     private void cbUFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbUFItemStateChanged
         String estado = (String) evt.getItem();
-        this.carregarCidades(estado);
+        CarregarDados.carregarCidades(estado, this.cbCidade, this.estadosCidades);
     }//GEN-LAST:event_cbUFItemStateChanged
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         if (cbTipo.getSelectedItem().toString().equals("Estudante")) {
             this.tMatriculaEscolar.setEnabled(true);
             this.tLocalEstudo.setEnabled(true);
-            this.tDataDeNasc.setEnabled(false);
+            this.tDataNasc.setEnabled(false);
             this.tValeTransporte.setEnabled(false);
         } else if (cbTipo.getSelectedItem().toString().equals("Idoso")) {
             this.tMatriculaEscolar.setEnabled(false);
             this.tLocalEstudo.setEnabled(false);
-            this.tDataDeNasc.setEnabled(true);
+            this.tDataNasc.setEnabled(true);
             this.tValeTransporte.setEnabled(false);
         } else {
             this.tMatriculaEscolar.setEnabled(false);
             this.tLocalEstudo.setEnabled(false);
-            this.tDataDeNasc.setEnabled(false);
+            this.tDataNasc.setEnabled(false);
             this.tValeTransporte.setEnabled(true);
         }
     }//GEN-LAST:event_cbTipoActionPerformed
-
-    private void carregarCidades(String estado) {
-        System.out.println(estado);
-        this.cbCidade.removeAllItems();
-        for (String cidade : this.estadosCidades.get(estado)) {
-            this.cbCidade.addItem(cidade);
-        }
-    }
-
-    private void carregarEstados() {
-        this.cbUF.removeAllItems();
-        TreeSet<String> estados = new TreeSet<String>(this.estadosCidades.keySet());
-        for (String estado : estados) {
-            this.cbUF.addItem(estado);
-        }
+   
+    private void carregarDados() {
+        this.cbTipo.setSelectedItem(this.usuario.getTipo());
+        this.tNome.setText(this.usuario.getNome());
+        this.tCPF.setText(this.usuario.getCpf());
+        this.tFone.setText(this.usuario.getTelefone());
+        
+        this.tEnd.setText(this.usuario.getEndereco());
+        this.tNumero.setText(""+this.usuario.getNum());
+        this.tBairro.setText(this.usuario.getBairro());
+        this.tCep.setText(this.usuario.getCep());
+        this.cbCidade.setSelectedItem(this.usuario.getCidade());
+        this.cbUF.setSelectedItem(this.usuario.getEstado());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -405,7 +435,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField tBairro;
     private javax.swing.JFormattedTextField tCPF;
     private javax.swing.JFormattedTextField tCep;
-    private javax.swing.JFormattedTextField tDataDeNasc;
+    private javax.swing.JFormattedTextField tDataNasc;
     private javax.swing.JTextField tEnd;
     private javax.swing.JFormattedTextField tFone;
     private javax.swing.JTextField tLocalEstudo;

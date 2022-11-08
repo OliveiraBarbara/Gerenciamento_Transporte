@@ -15,8 +15,8 @@ public class Estudante extends Usuario implements Serializable {
     private String matriculaEscolar;
     private String localEstudo;
 
-    public Estudante(String matriculaEscolar, String localEstudo, String cpf, String nome, String endereco, String cidade, String telefone, String tipo) {
-        super(cpf, nome, endereco, cidade, telefone, tipo);
+    public Estudante(String matriculaEscolar, String localEstudo, String cpf, String nome, String endereco, int num, String bairro, String cep, String cidade, String estado, String telefone, String tipo) {
+        super(cpf, nome, endereco, num, bairro, cep, cidade, estado, telefone, tipo);
         this.matriculaEscolar = matriculaEscolar;
         this.localEstudo = localEstudo;
     }

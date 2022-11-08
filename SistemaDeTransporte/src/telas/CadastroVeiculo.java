@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import operacoes.CadastroUsuarioOperacao;
 import operacoes.CadastroVeiculoOperacao;
 
 /**
@@ -282,11 +281,17 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         String tipo = (String) this.cbTipo.getSelectedItem();
-        System.out.println(tipo);
         String acessivel = this.rbSim.isSelected() ? "Sim" : this.rbNao.isSelected() ? "Não" : "Não informado";
+        String numSeguro = this.tNumSeguro.getText();
+        String integracao = this.tIntegracao.getText();
+        String regioes = this.tRegioes.getText();
         int capacidade = Integer.parseInt(this.sCapacidade.getValue().toString());
+        String bairros = this.tBairro.getText();
+        String modelo = this.tModelo.getText();
+        String placa = this.tPlaca.getText();
+        
         try {
-            CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, this.tdataAquisicao.getText(), capacidade, this.tNumSeguro.getText(), this.tIntegracao.getText(), this.tRegioes.getText(), this.tBairro.getText(), tipo, this.tModelo.getText(), this.tPlaca.getText(), acessivel);
+            CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, this.tdataAquisicao.getText(), capacidade, numSeguro, integracao, regioes, bairros, tipo, modelo, placa, acessivel);
         } catch (ParseException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -298,7 +303,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_bFecharActionPerformed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        
         if (cbTipo.getSelectedItem().toString().equals("Metrô")) {
             this.tRegioes.setEnabled(false);
             this.tBairro.setEnabled(true);
