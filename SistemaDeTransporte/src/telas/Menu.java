@@ -9,6 +9,8 @@ import io.LeitorGravadorObj;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
+import objetos.ObjetoFuncionario;
+import objetos.ObjetoUsuario;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -19,6 +21,7 @@ public class Menu extends javax.swing.JFrame {
     private HashMap<String, TreeSet<String>> estadosCidades;
     private Funcionario funcionario;
     private Usuario usuario;
+    private Veiculo veiculo;
 
     public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
         initComponents();
@@ -378,8 +381,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
        
     private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
-        Gravador.gravarUsuario(new LeitorGravadorObj(), this.usuarios);
-        Gravador.gravarFuncionario(new LeitorGravadorObj(), this.funcionarios);
+        ObjetoUsuario usuario =  new ObjetoUsuario();
+        usuario.setUsuarios(usuarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), usuario, "./dados/usuarios.txt");
+        ObjetoFuncionario funcionario = new ObjetoFuncionario();
+        funcionario.setFuncionarios(funcionarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), funcionario, "./dados/funcionarios.txt");
         System.exit(0);
     }//GEN-LAST:event_bSairActionPerformed
 
@@ -420,11 +427,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bRelatorioRotasActionPerformed
 
     private void bEdVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdVeiculoActionPerformed
-        new EditVeiculo();
+        new EditVeiculo(this.veiculos);
     }//GEN-LAST:event_bEdVeiculoActionPerformed
 
     private void bCadVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadVeiculoActionPerformed
-        new CadastroVeiculo(this.veiculos);
+        new CadastroVeiculo(this.veiculos, this.veiculo);
     }//GEN-LAST:event_bCadVeiculoActionPerformed
 
     private void bRelatorioVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioVeiculoActionPerformed

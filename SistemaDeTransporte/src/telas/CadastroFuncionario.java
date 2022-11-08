@@ -1,12 +1,16 @@
 package telas;
 
 import classes.Funcionario;
+import classes.Gerente;
+import classes.Motorista;
+import classes.Secretaria;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import operacoes.CadastroFuncionarioOperacao;
 import operacoes.CarregarDados;
 
@@ -24,11 +28,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         this.estadosCidades = estadosCidades;
         this.funcionarios = funcionarios;
         this.funcionario = funcionario;
-        
-        if(this.funcionario != null){
+
+        if (this.funcionario != null) {
             this.carregarDados();
         }
-        
+
         CarregarDados.carregarEstados(this.cbUF, this.estadosCidades);
     }
 
@@ -218,10 +222,10 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lUf)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lFone)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tFone))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +253,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                                         .addComponent(lBarirro5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 26, Short.MAX_VALUE)))
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +346,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(hLabel)
-                        .addGap(0, 337, Short.MAX_VALUE)))
+                        .addGap(0, 349, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -376,14 +380,14 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String endereco = this.tEnd.getText();
         String bairro = this.tBairro.getText();
         String cep = this.tCep.getText();
-        
-        if(funcionario == null){
+
+        if (funcionario == null) {
             try {
                 CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, cpf, cargo, nome, salario, telefone, setor, cnh, turno, especialidade, local, endereco, num, bairro, cep, cidade, estado);
             } catch (ParseException ex) {
                 Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             this.funcionario.setNome(nome);
             this.funcionario.setCpf(cpf);
             this.funcionario.setCargo(cargo);
@@ -395,9 +399,22 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             this.funcionario.setCep(cep);
             this.funcionario.setCidade(cidade);
             this.funcionario.setUf(estado);
+
+            if (this.funcionario.getCargo().toLowerCase().equals("gerente")) {
+                Gerente gerente = (Gerente) funcionario;
+                gerente.setSetorResponsavel(setor);
+            } else if (this.funcionario.getCargo().toLowerCase().equals("motorista")) {
+                Motorista motorista = (Motorista) funcionario;
+                motorista.setCnh(cnh);
+                motorista.setTurnoTrabalho(turno);
+            } else if (this.funcionario.getCargo().toLowerCase().equals("secretária")) {
+                Secretaria secretaria = (Secretaria) funcionario;
+                secretaria.setEspecialidade(especialidade);
+                secretaria.setLocalAtendimento(local);
+            }
+            JOptionPane.showConfirmDialog(null, "Dados Atualizados com Sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
         }
-        
-        
+
         this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -431,22 +448,34 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String estado = (String) evt.getItem();
         CarregarDados.carregarCidades(estado, this.cbCidade, this.estadosCidades);
     }//GEN-LAST:event_cbUFItemStateChanged
-    
-    private void carregarDados() {
-        this.cbCargo.setSelectedItem(this.funcionario.getCargo());
-        this.tNome.setText(this.funcionario.getNome());
-        this.tCPF.setText(this.funcionario.getCpf());
-        this.tFone.setText(this.funcionario.getTelefone());
-        
-        this.tEnd.setText(this.funcionario.getEndereco());
-        this.tNumero.setText(""+this.funcionario.getNum());
-        this.tBairro.setText(this.funcionario.getBairro());
-        this.tCep.setText(this.funcionario.getCep());
-        this.cbCidade.setSelectedItem(this.funcionario.getCidade());
-        this.cbUF.setSelectedItem(this.funcionario.getUf());
 
-        this.tSalario.setText(""+this.funcionario.getSalario());
-    
+    private void carregarDados() {
+        cbCargo.setSelectedItem(this.funcionario.getCargo());
+        tNome.setText(this.funcionario.getNome());
+        tCPF.setText(this.funcionario.getCpf());
+        tFone.setText(this.funcionario.getTelefone());
+
+        tEnd.setText(this.funcionario.getEndereco());
+        tNumero.setText("" + this.funcionario.getNum());
+        tBairro.setText(this.funcionario.getBairro());
+        tCep.setText(this.funcionario.getCep());
+        cbUF.getModel().setSelectedItem(this.funcionario.getUf());
+        cbCidade.getModel().setSelectedItem(this.funcionario.getCidade());
+
+        tSalario.setText("" + this.funcionario.getSalario());
+
+        if (this.funcionario.getCargo().toLowerCase().equals("gerente")) {
+            Gerente gerente = (Gerente) funcionario;
+            tSetor.setText(gerente.getSetorResponsavel());
+        } else if (this.funcionario.getCargo().toLowerCase().equals("motorista")) {
+            Motorista motorista = (Motorista) funcionario;
+            tCnh.setText(motorista.getCnh());
+            tTurno.setText(motorista.getTurnoTrabalho());
+        } else if (this.funcionario.getCargo().toLowerCase().equals("secretária")) {
+            Secretaria secretaria = (Secretaria) funcionario;
+            tEspecialidade.setText(secretaria.getEspecialidade());
+            tLocal.setText(secretaria.getLocalAtendimento());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

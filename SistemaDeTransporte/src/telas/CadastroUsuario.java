@@ -1,12 +1,19 @@
 package telas;
 
+import classes.Comum;
+import classes.Estudante;
+import classes.Idoso;
 import classes.Usuario;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import operacoes.CadastroUsuarioOperacao;
 import operacoes.CarregarDados;
 
@@ -20,15 +27,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
         this.usuarios = usuarios;
         this.estadosCidades = estadosCidades;
         this.usuario = usuario;
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        
-        if(this.usuario != null){
+
+        if (this.usuario != null) {
             this.carregarDados();
         }
-        
+
         CarregarDados.carregarEstados(this.cbUF, this.estadosCidades);
     }
 
@@ -229,7 +236,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lFone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tFone, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tFone))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lEnd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -241,7 +248,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lCep)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tCep))
+                        .addComponent(tCep, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lTipo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -316,7 +323,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,14 +353,16 @@ public class CadastroUsuario extends javax.swing.JFrame {
         String local = this.tLocalEstudo.getText();
         String matricula = this.tMatriculaEscolar.getText();
         String vale = this.tValeTransporte.getText();
-        
-        if(usuario == null){
+        String data = this.tDataNasc.getText();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (usuario == null) {
             try {
                 CadastroUsuarioOperacao.cadastroUsuario(this.usuarios, cpf, nome, endereco, num, bairro, cep, cidade, estado, telefone, tipo, this.tDataNasc.getText(), local, matricula, vale);
             } catch (ParseException ex) {
                 Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             this.usuario.setNome(nome);
             this.usuario.setCpf(cpf);
             this.usuario.setTipo(tipo);
@@ -364,6 +373,22 @@ public class CadastroUsuario extends javax.swing.JFrame {
             this.usuario.setCep(cep);
             this.usuario.setCidade(cidade);
             this.usuario.setEstado(estado);
+            if (this.usuario.getTipo().toLowerCase().equals("estudante")) {
+                Estudante estudante = (Estudante) usuario;
+                estudante.setMatriculaEscolar(matricula);
+                estudante.setLocalEstudo(local);
+            } else if (this.usuario.getTipo().toLowerCase().equals("idoso")) {
+                Idoso idoso = (Idoso) usuario;
+                try {
+                    idoso.setDataNasc(formatter.parse(data));
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (this.usuario.getTipo().toLowerCase().equals("comum")) {
+                Comum comum = (Comum) usuario;
+                comum.setValeTransporte(vale);
+            }
+            JOptionPane.showConfirmDialog(null, "Dados Atualizados com Sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
         }
         this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
@@ -395,19 +420,33 @@ public class CadastroUsuario extends javax.swing.JFrame {
             this.tValeTransporte.setEnabled(true);
         }
     }//GEN-LAST:event_cbTipoActionPerformed
-   
+
     private void carregarDados() {
-        this.cbTipo.setSelectedItem(this.usuario.getTipo());
-        this.tNome.setText(this.usuario.getNome());
-        this.tCPF.setText(this.usuario.getCpf());
-        this.tFone.setText(this.usuario.getTelefone());
-        
-        this.tEnd.setText(this.usuario.getEndereco());
-        this.tNumero.setText(""+this.usuario.getNum());
-        this.tBairro.setText(this.usuario.getBairro());
-        this.tCep.setText(this.usuario.getCep());
-        this.cbCidade.setSelectedItem(this.usuario.getCidade());
-        this.cbUF.setSelectedItem(this.usuario.getEstado());
+        cbTipo.setSelectedItem(this.usuario.getTipo());
+        tNome.setText(this.usuario.getNome());
+        tCPF.setText(this.usuario.getCpf());
+        tFone.setText(this.usuario.getTelefone());
+
+        tEnd.setText(this.usuario.getEndereco());
+        tNumero.setText("" + this.usuario.getNum());
+        tBairro.setText(this.usuario.getBairro());
+        tCep.setText(this.usuario.getCep());
+        cbUF.getModel().setSelectedItem(this.usuario.getEstado());
+        cbCidade.getModel().setSelectedItem(this.usuario.getCidade());
+        if (this.usuario.getTipo().toLowerCase().equals("estudante")) {
+            Estudante estudante = (Estudante) usuario;
+            tMatriculaEscolar.setText(estudante.getMatriculaEscolar());
+            tLocalEstudo.setText(estudante.getLocalEstudo());
+        } else if (this.usuario.getTipo().toLowerCase().equals("idoso")) {
+            Idoso idoso = (Idoso) usuario;
+            Date dataNasc = idoso.getDataNasc();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String data = dateFormat.format(dataNasc);
+            tDataNasc.setText(data);
+        } else if (this.usuario.getTipo().toLowerCase().equals("comum")) {
+            Comum comum = (Comum) usuario;
+            tValeTransporte.setText(comum.getValeTransporte());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

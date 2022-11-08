@@ -19,7 +19,7 @@ public class Comum extends Usuario implements Serializable {
         this.valeTransporte = valeTransporte;
     }
 
-    public String isValeTransporte() {
+    public String getValeTransporte() {
         return valeTransporte;
     }
 

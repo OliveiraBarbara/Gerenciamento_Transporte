@@ -5,10 +5,6 @@
  */
 package io;
 
-import classes.Funcionario;
-import classes.Linha;
-import classes.Usuario;
-import classes.Veiculo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +14,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -31,7 +26,7 @@ import java.util.logging.Logger;
 public class LeitorGravadorObj implements LeituraGravacao {
 
     @Override
-    public void gravarUsuario(ArrayList<Usuario> usuarios) {
+    public void gravarObj(Object objeto, String path) {
         File dir = new File("./dados");
         if (!dir.exists()) {
             dir.mkdir();
@@ -39,8 +34,8 @@ public class LeitorGravadorObj implements LeituraGravacao {
 
         ObjectOutputStream file = null;
         try {
-            file = new ObjectOutputStream(new FileOutputStream("./dados/usuarios.txt"));
-            file.writeObject(usuarios);
+            file = new ObjectOutputStream(new FileOutputStream(path));
+            file.writeObject(objeto);
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         } finally {
@@ -53,18 +48,18 @@ public class LeitorGravadorObj implements LeituraGravacao {
     }
 
     @Override
-    public ArrayList<Usuario> lerUsuario() {
-        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    public Object lerObj(String path) {
+        Object objeto = new Object();
 
-        File dados = new File("./dados/usuarios.txt");
+        File dados = new File(path);
         if (!dados.exists()) {
-            return usuarios;
+            return null;
         }
 
         ObjectInputStream file = null;
         try {
             file = new ObjectInputStream(new FileInputStream(dados));
-            usuarios = (ArrayList<Usuario>) file.readObject();
+            objeto = (Object) file.readObject();
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         } finally {
@@ -75,7 +70,7 @@ public class LeitorGravadorObj implements LeituraGravacao {
             }
         }
 
-        return usuarios;
+        return objeto;
     }
 
     @Override
@@ -117,149 +112,4 @@ public class LeitorGravadorObj implements LeituraGravacao {
 
         return estadosCidades;
     }
-
-    @Override
-    public void gravarFuncionario(ArrayList<Funcionario> funcionarios) {
-        File dir = new File("./dados");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        ObjectOutputStream file = null;
-        try {
-            file = new ObjectOutputStream(new FileOutputStream("./dados/funcionarios.txt"));
-            file.writeObject(funcionarios);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-    }
-
-    @Override
-    public ArrayList<Funcionario> lerFuncionario() {
-        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-
-        File dados = new File("./dados/funcionarios.txt");
-        if (!dados.exists()) {
-            return funcionarios;
-        }
-
-        ObjectInputStream file = null;
-        try {
-            file = new ObjectInputStream(new FileInputStream(dados));
-            funcionarios = (ArrayList<Funcionario>) file.readObject();
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-
-        return funcionarios;
-    }
-
-    @Override
-    public void gravarVeiculo(ArrayList<Veiculo> veiculos) {
-        File dir = new File("./dados");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        ObjectOutputStream file = null;
-        try {
-            file = new ObjectOutputStream(new FileOutputStream("./dados/veiculos.txt"));
-            file.writeObject(veiculos);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-    }
-
-    @Override
-    public ArrayList<Veiculo> lerVeiculo() {
-        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
-
-        File dados = new File("./dados/veiculos.txt");
-        if (!dados.exists()) {
-            return veiculos;
-        }
-
-        ObjectInputStream file = null;
-        try {
-            file = new ObjectInputStream(new FileInputStream(dados));
-            veiculos = (ArrayList<Veiculo>) file.readObject();
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-
-        return veiculos;
-    }
-
-    @Override
-    public void gravarRota(ArrayList<Linha> linhas) {
-        File dir = new File("./dados");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        ObjectOutputStream file = null;
-        try {
-            file = new ObjectOutputStream(new FileOutputStream("./dados/linhas.txt"));
-            file.writeObject(linhas);
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-    }
-
-    @Override
-    public ArrayList<Linha> lerRota() {
-        ArrayList<Linha> linhas = new ArrayList<Linha>();
-
-        File dados = new File("./dados/linhas.txt");
-        if (!dados.exists()) {
-            return linhas;
-        }
-
-        ObjectInputStream file = null;
-        try {
-            file = new ObjectInputStream(new FileInputStream(dados));
-            linhas = (ArrayList<Linha>) file.readObject();
-        } catch (Exception ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            try {
-                file.close();
-            } catch (Exception ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-        }
-
-        return linhas;
-    }
-
 }

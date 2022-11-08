@@ -13,6 +13,7 @@ import io.LeitorGravadorObj;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import objetos.ObjetoFuncionario;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 public class CadastroFuncionarioOperacao {
     
     public static void cadastroFuncionario(ArrayList<Funcionario> funcionarios, String cpf, String cargo, String nome, double salario, String telefone, String setorResponsável, String cnh, String turnoTrabalho, String especialidade, String localAtendimento, String endereco, int num, String bairro, String cep, String cidade, String uf) throws ParseException {
+        ObjetoFuncionario funcionario = new ObjetoFuncionario();
         switch (cargo.toLowerCase()) {
             case "motorista":
                 Motorista motorista = new Motorista(cpf, cargo, nome, salario, telefone, endereco, num, bairro, cep, cidade, uf, cnh, turnoTrabalho);
@@ -42,7 +44,8 @@ public class CadastroFuncionarioOperacao {
                 break;
 
         }
-        Gravador.gravarFuncionario(new LeitorGravadorObj(), funcionarios);
+        funcionario.setFuncionarios(funcionarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(),funcionario, "./dados/funcionarios.txt");
     }
     
 }

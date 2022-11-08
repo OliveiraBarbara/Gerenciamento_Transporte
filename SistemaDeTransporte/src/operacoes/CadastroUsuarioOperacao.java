@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import objetos.ObjetoUsuario;
 
 /**
  *
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 public class CadastroUsuarioOperacao {
 
     public static void cadastroUsuario(ArrayList<Usuario> usuarios, String cpf, String nome, String endereco, int num, String bairro, String cep, String cidade, String estado, String telefone, String tipo, String dataNasc, String localEstudo, String matriculaEscolar, String valeTranspote) throws ParseException {
+        ObjetoUsuario usuario =  new ObjetoUsuario();
         switch (tipo.toLowerCase()) {
             case "idoso":
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -44,6 +46,7 @@ public class CadastroUsuarioOperacao {
                 break;
 
         }
-        Gravador.gravarUsuario(new LeitorGravadorObj(), usuarios);
+        usuario.setUsuarios(usuarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), usuario, "./dados/usuarios.txt");
     }
 }

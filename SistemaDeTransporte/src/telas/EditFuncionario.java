@@ -12,7 +12,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import operacoes.EditarFuncionario;
+import objetos.ObjetoFuncionario;
+import operacoes.Editar;
 
 public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFrame {
 
@@ -48,13 +49,9 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pTabela = new javax.swing.JPanel();
+        pBotoes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaFuncionario = new javax.swing.JTable();
-        pBotoes = new javax.swing.JPanel();
-        bFechar = new javax.swing.JButton();
-        bEditar = new javax.swing.JButton();
-        bRemover = new javax.swing.JButton();
         lTitulo = new javax.swing.JLabel();
         pCampo = new javax.swing.JPanel();
         lCPF = new javax.swing.JLabel();
@@ -63,6 +60,9 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
         tCPF = new javax.swing.JFormattedTextField();
         lCPF2 = new javax.swing.JLabel();
         cbCargo = new javax.swing.JComboBox<>();
+        bFechar = new javax.swing.JButton();
+        bEditar = new javax.swing.JButton();
+        bRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Transporte");
@@ -72,6 +72,8 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
                 formWindowClosing(evt);
             }
         });
+
+        pBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         tabelaFuncionario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,70 +101,20 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
         });
         jScrollPane1.setViewportView(tabelaFuncionario);
 
-        javax.swing.GroupLayout pTabelaLayout = new javax.swing.GroupLayout(pTabela);
-        pTabela.setLayout(pTabelaLayout);
-        pTabelaLayout.setHorizontalGroup(
-            pTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pTabelaLayout.setVerticalGroup(
-            pTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-        );
-
-        bFechar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        bFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/multiply (1).png"))); // NOI18N
-        bFechar.setText("Fechar");
-        bFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bFecharActionPerformed(evt);
-            }
-        });
-
-        bEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        bEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar-arquivo.png"))); // NOI18N
-        bEditar.setText("Editar");
-        bEditar.setEnabled(false);
-        bEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEditarActionPerformed(evt);
-            }
-        });
-
-        bRemover.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/trash-bin.png"))); // NOI18N
-        bRemover.setText("Remover");
-        bRemover.setEnabled(false);
-        bRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRemoverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pBotoesLayout = new javax.swing.GroupLayout(pBotoes);
         pBotoes.setLayout(pBotoesLayout);
         pBotoesLayout.setHorizontalGroup(
             pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBotoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bFechar)
-                .addGap(97, 97, 97))
+            .addGroup(pBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         pBotoesLayout.setVerticalGroup(
             pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBotoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -170,7 +122,7 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
         lTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente.png"))); // NOI18N
         lTitulo.setText("Funcionários");
 
-        pCampo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pCampo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"), "Filtro"));
 
         lCPF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lCPF.setText("CPF:");
@@ -240,20 +192,54 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bFechar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/multiply (1).png"))); // NOI18N
+        bFechar.setText("Fechar");
+        bFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFecharActionPerformed(evt);
+            }
+        });
+
+        bEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar-arquivo.png"))); // NOI18N
+        bEditar.setText("Editar");
+        bEditar.setEnabled(false);
+        bEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditarActionPerformed(evt);
+            }
+        });
+
+        bRemover.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        bRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/trash-bin.png"))); // NOI18N
+        bRemover.setText("Remover");
+        bRemover.setEnabled(false);
+        bRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lTitulo)
-                            .addComponent(pTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lTitulo)
+                    .addComponent(pBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bFechar)
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,11 +248,14 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
                 .addComponent(lTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(pTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,12 +280,14 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
         int linha = this.tabelaFuncionario.getSelectedRow();
         if (linha >= 0) {
             String id = this.tabelaFuncionario.getValueAt(linha, 0).toString();
-            EditarFuncionario.editarFuncionario(funcionarios, id, estadosCidades);
+            Editar.editarFuncionario(funcionarios, id, estadosCidades);
         }
     }//GEN-LAST:event_bEditarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
-        Gravador.gravarFuncionario(new LeitorGravadorObj(), funcionarios);
+        ObjetoFuncionario funcionario = new ObjetoFuncionario();
+        funcionario.setFuncionarios(funcionarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), funcionario, "./dados/funcionarios.txt");
         this.dispose();
     }//GEN-LAST:event_bFecharActionPerformed
 
@@ -305,7 +296,9 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
     }//GEN-LAST:event_cbCargoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Gravador.gravarFuncionario(new LeitorGravadorObj(), funcionarios);
+        ObjetoFuncionario funcionario = new ObjetoFuncionario();
+        funcionario.setFuncionarios(funcionarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), funcionario, "./dados/funcionarios.txt");
     }//GEN-LAST:event_formWindowClosing
 
     private void tCPFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tCPFKeyReleased
@@ -328,7 +321,6 @@ public class EditFuncionario extends javax.swing.JFrame implements IAtualizarFra
     private javax.swing.JLabel lTitulo;
     private javax.swing.JPanel pBotoes;
     private javax.swing.JPanel pCampo;
-    private javax.swing.JPanel pTabela;
     private javax.swing.JFormattedTextField tCPF;
     private javax.swing.JTextField tNome;
     private javax.swing.JTable tabelaFuncionario;

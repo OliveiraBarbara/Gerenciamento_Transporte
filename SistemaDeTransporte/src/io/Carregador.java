@@ -5,11 +5,6 @@
  */
 package io;
 
-import classes.Funcionario;
-import classes.Linha;
-import classes.Usuario;
-import classes.Veiculo;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -19,23 +14,12 @@ import java.util.TreeSet;
  */
 public class Carregador {
 
-    public static ArrayList<Usuario> carregarUsuario(LeituraGravacao arq) {
-        return arq.lerUsuario();
+    public static Object carregarObjeto(LeituraGravacao arq, String path) {
+        return arq.lerObj(path);
     }
 
     public static HashMap<String, TreeSet<String>> carregarEstadosCidades(LeituraGravacao arqv) {
         return arqv.carregarEstadosCidades();
     }
 
-    public static ArrayList<Funcionario> carregarFuncionario(LeituraGravacao arq) {
-        return arq.lerFuncionario();
-    }
-    
-    public static ArrayList<Veiculo> carregarVeiculo(LeituraGravacao arq) {
-        return arq.lerVeiculo();
-    }
-    
-    public static ArrayList<Linha> carregarLinha(LeituraGravacao arq){
-        return arq.lerRota();
-    }
 }

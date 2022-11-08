@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import objetos.ObjetoVeiculo;
 
 /**
  *
@@ -23,6 +24,7 @@ public class CadastroVeiculoOperacao {
 
     public static void cadastroVeiculo(ArrayList<Veiculo> veiculos, String dataAqui, int capacidade, String seguro, String integracao, String regioes, String bairro, String tipo, String modelo, String placa, String acessivel) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        ObjetoVeiculo veiculo = new ObjetoVeiculo();
         switch (tipo.toLowerCase()) {
             case "metrô":
                 Metro metro = new Metro(tipo, capacidade, acessivel, seguro, integracao, formatter.parse(dataAqui), bairro);
@@ -44,6 +46,7 @@ public class CadastroVeiculoOperacao {
                 break;
 
         }
-        Gravador.gravarVeiculo(new LeitorGravadorObj(), veiculos);
+        veiculo.setVeiculos(veiculos);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), veiculo, "./dados/veiculos.txt");
     }
 }

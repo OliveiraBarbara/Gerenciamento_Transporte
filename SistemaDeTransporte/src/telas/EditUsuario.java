@@ -11,7 +11,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import operacoes.EditarUsuario;
+import objetos.ObjetoUsuario;
+import operacoes.Editar;
 
 public class EditUsuario extends javax.swing.JFrame {
 
@@ -111,7 +112,7 @@ public class EditUsuario extends javax.swing.JFrame {
             pTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTabelaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -277,12 +278,14 @@ public class EditUsuario extends javax.swing.JFrame {
         int linha = this.tabelaUsuario.getSelectedRow();
         if (linha >= 0) {
             String id = this.tabelaUsuario.getValueAt(linha, 0).toString();
-            EditarUsuario.editarUsuario(usuarios, id, estadosCidades);
+            Editar.editarUsuario(usuarios, id, estadosCidades);
         }
     }//GEN-LAST:event_bEditarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
-        Gravador.gravarUsuario(new LeitorGravadorObj(), usuarios);
+        ObjetoUsuario usuario =  new ObjetoUsuario();
+        usuario.setUsuarios(usuarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), usuario, "./dados/usuarios.txt");
         this.dispose();
     }//GEN-LAST:event_bFecharActionPerformed
 
@@ -302,7 +305,9 @@ public class EditUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bRemoverActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Gravador.gravarUsuario(new LeitorGravadorObj(), usuarios);
+        ObjetoUsuario usuario =  new ObjetoUsuario();
+        usuario.setUsuarios(usuarios);
+        Gravador.gravarObjeto(new LeitorGravadorObj(), usuario, "./dados/usuarios.txt");
     }//GEN-LAST:event_formWindowClosing
 
     private void tCPFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tCPFKeyReleased

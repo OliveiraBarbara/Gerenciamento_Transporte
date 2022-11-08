@@ -4,11 +4,18 @@
  */
 package telas;
 
+import classes.Metro;
+import classes.Onibus;
+import classes.Trem;
 import classes.Veiculo;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import operacoes.CadastroVeiculoOperacao;
 
 /**
@@ -18,16 +25,22 @@ import operacoes.CadastroVeiculoOperacao;
 public class CadastroVeiculo extends javax.swing.JFrame {
 
     private ArrayList<Veiculo> veiculos;
+    private Veiculo veiculo;
 
     /**
      * Creates new form CadastroVeiculo
      */
-    public CadastroVeiculo(ArrayList<Veiculo> veiculos) {
+    public CadastroVeiculo(ArrayList<Veiculo> veiculos, Veiculo veiculo) {
+        this.veiculos = veiculos;
+        this.veiculo = veiculo;
+
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
-        this.veiculos = veiculos;
+        if (veiculo != null) {
+            this.carregarDados();
+        }
     }
 
     /**
@@ -289,11 +302,37 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         String bairros = this.tBairro.getText();
         String modelo = this.tModelo.getText();
         String placa = this.tPlaca.getText();
-        
-        try {
-            CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, this.tdataAquisicao.getText(), capacidade, numSeguro, integracao, regioes, bairros, tipo, modelo, placa, acessivel);
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        String data = this.tdataAquisicao.getText();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (veiculo == null) {
+            try {
+                CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, data, capacidade, numSeguro, integracao, regioes, bairros, tipo, modelo, placa, acessivel);
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            this.veiculo.setTipo(tipo);
+            this.veiculo.setSeguro(numSeguro);
+            this.veiculo.setAcessibilidade(acessivel);
+            try {
+                this.veiculo.setAquisicao(formatter.parse(data));
+            } catch (ParseException ex) {
+                Logger.getLogger(CadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.veiculo.setIntegracao(integracao);
+            if (this.veiculo.getTipo().toLowerCase().equals("metrô")) {
+                Metro metro = (Metro) veiculo;
+                metro.setBairros(bairros);
+            } else if (this.veiculo.getTipo().toLowerCase().equals("ônibus")) {
+                Onibus onibus = (Onibus) veiculo;
+                onibus.setModelo(modelo);
+                onibus.setPlaca(placa);
+            } else if (this.veiculo.getTipo().toLowerCase().equals("trem")) {
+                Trem trem = (Trem) veiculo;
+                trem.setRegiao(regioes);
+            }
+            JOptionPane.showConfirmDialog(null, "Dados Atualizados com Sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
         }
         this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
@@ -321,10 +360,30 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbTipoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void carregarDados() {
+        Date dataAquisicao = veiculo.getAquisicao();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String data = dateFormat.format(dataAquisicao);
 
+        cbTipo.setSelectedItem(this.veiculo.getTipo());
+        tdataAquisicao.setText(data);
+        sCapacidade.setValue(this.veiculo.getCapacidade());
+        rbSim.setSelected(veiculo.getAcessibilidade().equals("Sim"));
+        rbNao.setSelected(veiculo.getAcessibilidade().equals("Não"));
+        tNumSeguro.setText(this.veiculo.getSeguro());
+        tIntegracao.setText(this.veiculo.getIntegracao());
+        if (this.veiculo.getTipo().toLowerCase().equals("metrô")) {
+            Metro metro = (Metro) veiculo;
+            tBairro.setText(metro.getBairros());
+        } else if (this.veiculo.getTipo().toLowerCase().equals("ônibus")) {
+            Onibus onibus = (Onibus) veiculo;
+            tPlaca.setText(onibus.getPlaca());
+            tModelo.setText(onibus.getModelo());
+        } else if (this.veiculo.getTipo().toLowerCase().equals("trem")) {
+            Trem trem = (Trem) veiculo;
+            tRegioes.setText(trem.getRegiao());
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastrar;
     private javax.swing.JButton bFechar;
