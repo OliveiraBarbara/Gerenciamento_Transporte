@@ -1,12 +1,21 @@
 package telas;
 
+import classes.Paradas;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import operacoes.AddParadaOperacao;
 
 public class AddParadas extends javax.swing.JFrame {
 
-    public AddParadas() {
+    private ArrayList<Paradas> paradas;
+
+    public AddParadas(ArrayList<Paradas> paradas) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.paradas = paradas;
     }
 
     @SuppressWarnings("unchecked")
@@ -51,11 +60,6 @@ public class AddParadas extends javax.swing.JFrame {
         lPontoParada.setText("Ponto de Parada:");
 
         tHoraSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        tHoraSaida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tHoraSaidaActionPerformed(evt);
-            }
-        });
 
         lHoraSaida.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lHoraSaida.setText("Horário de Saída:");
@@ -173,16 +177,17 @@ public class AddParadas extends javax.swing.JFrame {
 
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-       
+       try {
+            AddParadaOperacao.addParada(this.paradas, tEnd.getText(), tPontoParada.getText(), tHoraSaida.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(AddParadas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_bFecharActionPerformed
-
-    private void tHoraSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tHoraSaidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tHoraSaidaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastrar;

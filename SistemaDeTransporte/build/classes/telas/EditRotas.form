@@ -178,13 +178,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lCPF" min="-2" max="-2" attributes="0"/>
+                  <Component id="lPontoIni" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tNome1" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="tPontoIni" min="-2" pref="165" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lCPF1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lPontoFim" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="tNome" min="-2" pref="163" max="-2" attributes="0"/>
+                  <Component id="tPontoFim" min="-2" pref="163" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -195,11 +195,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="lCPF1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tNome1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lPontoFim" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tPontoFim" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tPontoIni" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lCPF" min="-2" max="-2" attributes="0"/>
+                      <Component id="lPontoIni" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -207,7 +207,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lCPF">
+        <Component class="javax.swing.JLabel" name="lPontoIni">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -215,7 +215,7 @@
             <Property name="text" type="java.lang.String" value="Ponto Inicial:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lCPF1">
+        <Component class="javax.swing.JLabel" name="lPontoFim">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -223,9 +223,15 @@
             <Property name="text" type="java.lang.String" value="Ponto Final:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tNome">
+        <Component class="javax.swing.JTextField" name="tPontoFim">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPontoFimActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tNome1">
+        <Component class="javax.swing.JTextField" name="tPontoIni">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPontoIniActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

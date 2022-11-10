@@ -5,6 +5,8 @@
 package classes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -17,13 +19,54 @@ public class Linha implements Serializable, Comparable<Linha> {
     private String pontoInicial;
     private String pontoFinal;
     private String endereco;
+    private String bairro;
+    private int numero;
+    private Date horario;
+    private ArrayList<Paradas> paradas;
 
-    public Linha(String pontoInicial, String pontoFinal, String endereco) {
+
+    public Linha(String pontoInicial, String pontoFinal, String endereco, ArrayList<Paradas> paradas,String bairro,int numero, Date horario) {
         UUID uuid = UUID.randomUUID();
         this.idLinha = uuid.toString();
         this.pontoInicial = pontoInicial;
         this.pontoFinal = pontoFinal;
         this.endereco = endereco;
+        this.paradas = paradas;
+        this.bairro = bairro;
+        this.horario = horario;
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Date getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Date horario) {
+        this.horario = horario;
+    }
+
+    public ArrayList<Paradas> getParadas() {
+        return paradas;
+    }
+
+    public void setParadas(ArrayList<Paradas> paradas) {
+        this.paradas = paradas;
     }
 
     public String getIdLinha() {

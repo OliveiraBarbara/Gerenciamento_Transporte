@@ -1,7 +1,7 @@
 package telas;
 
-import classes.Funcionario;
 import classes.Linha;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -9,11 +9,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class EditRotas extends javax.swing.JFrame {
-
-    public EditRotas() {
+    private ArrayList<Linha> linhas;
+    public EditRotas(ArrayList<Linha> linhas) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.linhas = linhas;
         
         this.tabelaRotas.getColumnModel().getColumn(0).setMinWidth(0);
         this.tabelaRotas.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -26,6 +27,7 @@ public class EditRotas extends javax.swing.JFrame {
                 bEditar.setEnabled(tabelaRotas.getSelectedRow() >= 0);
             }
         });
+        carregarDados();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,10 +40,10 @@ public class EditRotas extends javax.swing.JFrame {
         tabelaRotas = new javax.swing.JTable();
         lTitulo = new javax.swing.JLabel();
         pCampo = new javax.swing.JPanel();
-        lCPF = new javax.swing.JLabel();
-        lCPF1 = new javax.swing.JLabel();
-        tNome = new javax.swing.JTextField();
-        tNome1 = new javax.swing.JTextField();
+        lPontoIni = new javax.swing.JLabel();
+        lPontoFim = new javax.swing.JLabel();
+        tPontoFim = new javax.swing.JTextField();
+        tPontoIni = new javax.swing.JTextField();
         bFechar = new javax.swing.JButton();
         bEditar = new javax.swing.JButton();
         bRemover = new javax.swing.JButton();
@@ -112,11 +114,23 @@ public class EditRotas extends javax.swing.JFrame {
 
         pCampo.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
 
-        lCPF.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lCPF.setText("Ponto Inicial:");
+        lPontoIni.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lPontoIni.setText("Ponto Inicial:");
 
-        lCPF1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lCPF1.setText("Ponto Final:");
+        lPontoFim.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lPontoFim.setText("Ponto Final:");
+
+        tPontoFim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tPontoFimActionPerformed(evt);
+            }
+        });
+
+        tPontoIni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tPontoIniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCampoLayout = new javax.swing.GroupLayout(pCampo);
         pCampo.setLayout(pCampoLayout);
@@ -124,13 +138,13 @@ public class EditRotas extends javax.swing.JFrame {
             pCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCampoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lCPF)
+                .addComponent(lPontoIni)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tPontoIni, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lCPF1)
+                .addComponent(lPontoFim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tNome, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tPontoFim, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
         pCampoLayout.setVerticalGroup(
@@ -139,10 +153,10 @@ public class EditRotas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lCPF1)
-                        .addComponent(tNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lCPF))
+                        .addComponent(lPontoFim)
+                        .addComponent(tPontoFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tPontoIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lPontoIni))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -246,38 +260,48 @@ public class EditRotas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bRemoverActionPerformed
 
+    private void tPontoIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPontoIniActionPerformed
+        carregarDados();
+    }//GEN-LAST:event_tPontoIniActionPerformed
+
+    private void tPontoFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPontoFimActionPerformed
+        carregarDados();
+    }//GEN-LAST:event_tPontoFimActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEditar;
     private javax.swing.JButton bFechar;
     private javax.swing.JButton bRemover;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lCPF;
-    private javax.swing.JLabel lCPF1;
+    private javax.swing.JLabel lPontoFim;
+    private javax.swing.JLabel lPontoIni;
     private javax.swing.JLabel lTitulo;
     private javax.swing.JPanel pBotoes;
     private javax.swing.JPanel pCampo;
     private javax.swing.JPanel pTabela;
-    private javax.swing.JTextField tNome;
-    private javax.swing.JTextField tNome1;
+    private javax.swing.JTextField tPontoFim;
+    private javax.swing.JTextField tPontoIni;
     private javax.swing.JTable tabelaRotas;
     // End of variables declaration//GEN-END:variables
 
-    /*private void carregarDados() {
+    private void carregarDados() {
         DefaultTableModel modelo = (DefaultTableModel) this.tabelaRotas.getModel();
 
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
 
-        String cpf = this.tCPF.getText().toLowerCase();
-        String nome = this.tNome.getText().toLowerCase();
-        String cargo = (String) this.cbCargo.getSelectedItem();
+        String pontoIni = this.tPontoIni.getText().toLowerCase();
+        String pontoFim = this.tPontoFim.getText().toLowerCase();
+        System.out.println(this.linhas.isEmpty());
         for (Linha linha : this.linhas) {
-            if ((nome.isBlank() || funcionario.getNome().toLowerCase().contains(nome)) && (cpf.isBlank() || funcionario.getCpf().contains(cpf)) && (cargo == null || cargo.equals("Selecione") || funcionario.getCargo().contains(cargo))) {
-                Object[] row = {funcionario.getIdFunc(), funcionario.getCpf(), funcionario.getNome(), funcionario.getCargo(), funcionario.getSalario(), funcionario.getUf()};
+            
+            if ((pontoIni.isEmpty() || linha.getPontoInicial().toLowerCase().contains(pontoIni))
+                    && (pontoFim.isEmpty()|| linha.getPontoFinal().contains(pontoFim))) {
+                Object[] row = {linha.getIdLinha(), linha.getPontoInicial(), linha.getPontoFinal(), linha.getHorario()};
                 modelo.addRow(row);
             }
         }
-    }*/
+    }
 
 }

@@ -6,6 +6,7 @@ package classes;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -13,23 +14,24 @@ import java.util.Date;
  */
 public class Paradas implements Serializable {
 
-    private int idParadas;
+    private String idParadas;
     private String endereco;
     private String pontoParada;
     private Date horario;
 
-    public Paradas(int idParadas, String endereco, String pontoParada, Date horario) {
-        this.idParadas = idParadas;
+    public Paradas(String endereco, String pontoParada, Date horario) {
+        UUID uuid = UUID.randomUUID();
+        this.idParadas = uuid.toString();
         this.endereco = endereco;
         this.pontoParada = pontoParada;
         this.horario = horario;
     }
 
-    public int getIdParadas() {
+    public String getIdParadas() {
         return idParadas;
     }
 
-    public void setIdParadas(int idParadas) {
+    public void setIdParadas(String idParadas) {
         this.idParadas = idParadas;
     }
 

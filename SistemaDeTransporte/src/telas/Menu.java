@@ -180,41 +180,21 @@ public class Menu extends javax.swing.JFrame {
         bRelatorioFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/carteira-de-identidade.png"))); // NOI18N
         bRelatorioFunc.setText("Funcionários");
         bRelatorioFunc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        bRelatorioFunc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRelatorioFuncActionPerformed(evt);
-            }
-        });
 
         bRelatorioUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pessoas.png"))); // NOI18N
         bRelatorioUsuario.setText("Usuários");
         bRelatorioUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        bRelatorioUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRelatorioUsuarioActionPerformed(evt);
-            }
-        });
 
         bRelatorioRotas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioRotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rota.png"))); // NOI18N
         bRelatorioRotas.setText("Rotas");
         bRelatorioRotas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        bRelatorioRotas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRelatorioRotasActionPerformed(evt);
-            }
-        });
 
         bRelatorioVeiculo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/veiculos.png"))); // NOI18N
         bRelatorioVeiculo.setText("Veículos");
         bRelatorioVeiculo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        bRelatorioVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRelatorioVeiculoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout painelRelatorioLayout = new javax.swing.GroupLayout(painelRelatorio);
         painelRelatorio.setLayout(painelRelatorioLayout);
@@ -411,20 +391,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bEdFuncActionPerformed
 
     private void bEdRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdRotasActionPerformed
-        new EditRotas();
+        new EditRotas(this.linhas);
     }//GEN-LAST:event_bEdRotasActionPerformed
-
-    private void bRelatorioFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioFuncActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bRelatorioFuncActionPerformed
-
-    private void bRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bRelatorioUsuarioActionPerformed
-
-    private void bRelatorioRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioRotasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bRelatorioRotasActionPerformed
 
     private void bEdVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdVeiculoActionPerformed
         new EditVeiculo(this.veiculos);
@@ -433,10 +401,6 @@ public class Menu extends javax.swing.JFrame {
     private void bCadVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadVeiculoActionPerformed
         new CadastroVeiculo(this.veiculos, this.veiculo);
     }//GEN-LAST:event_bCadVeiculoActionPerformed
-
-    private void bRelatorioVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioVeiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bRelatorioVeiculoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadFunc;

@@ -1,11 +1,16 @@
 package telas;
 
 import classes.Linha;
+import classes.Paradas;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import operacoes.CadastroLinhaOperacao;
 
 
 public class CadastroRotas extends javax.swing.JFrame {
-
+    private ArrayList<Paradas> paradas = new ArrayList<Paradas>();
     private ArrayList<Linha> linhas;
     
     public CadastroRotas(ArrayList<Linha> linhas) {
@@ -14,7 +19,6 @@ public class CadastroRotas extends javax.swing.JFrame {
         this.setVisible(true);
         this.linhas = linhas;
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -199,7 +203,12 @@ public class CadastroRotas extends javax.swing.JFrame {
 
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-       
+       try {
+            CadastroLinhaOperacao.cadastroLinha(this.paradas, linhas, tPontoIni.getText(), tPontoFim.getText(), tEnd.getText(),Integer.parseInt(tNum.getText()),tBairro.getText(),tHoraSaida.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroRotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
@@ -207,7 +216,7 @@ public class CadastroRotas extends javax.swing.JFrame {
     }//GEN-LAST:event_bFecharActionPerformed
 
     private void bParadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bParadasActionPerformed
-        new AddParadas();
+        new AddParadas(this.paradas);
     }//GEN-LAST:event_bParadasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
