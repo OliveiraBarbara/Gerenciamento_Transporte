@@ -45,7 +45,7 @@ public class CadastroFuncionarioOperacao {
 
         }
         funcionario.setFuncionarios(funcionarios);
-        Gravador.gravarObjeto(new LeitorGravadorObj(),funcionario, "./dados/linhas.txt");
+        Gravador.gravarObjeto(new LeitorGravadorObj(),funcionario, "./dados/funcionarios.txt");
     }
     
 }

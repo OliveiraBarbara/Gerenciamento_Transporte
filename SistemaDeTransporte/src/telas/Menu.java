@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.TreeSet;
 import objetos.ObjetoFuncionario;
 import objetos.ObjetoUsuario;
+import operacoes.CriaPDFUsuario;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -185,6 +186,11 @@ public class Menu extends javax.swing.JFrame {
         bRelatorioUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pessoas.png"))); // NOI18N
         bRelatorioUsuario.setText("Usuários");
         bRelatorioUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bRelatorioUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRelatorioUsuarioActionPerformed(evt);
+            }
+        });
 
         bRelatorioRotas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioRotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rota.png"))); // NOI18N
@@ -401,6 +407,13 @@ public class Menu extends javax.swing.JFrame {
     private void bCadVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadVeiculoActionPerformed
         new CadastroVeiculo(this.veiculos, this.veiculo);
     }//GEN-LAST:event_bCadVeiculoActionPerformed
+
+    private void bRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioUsuarioActionPerformed
+        String[] arq = null;
+        
+        // TODO add your handling code here:
+        CriaPDFUsuario.main(arq);
+    }//GEN-LAST:event_bRelatorioUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadFunc;

@@ -333,7 +333,7 @@ public class EditRotas extends javax.swing.JFrame {
         for (Linha linha : this.linhas) {
             
             if ((pontoIni.isEmpty() || linha.getPontoInicial().toLowerCase().contains(pontoIni))
-                    && (pontoFim.isEmpty()|| linha.getPontoFinal().contains(pontoFim))) {
+                    && (pontoFim.isEmpty()|| linha.getPontoFinal().toLowerCase().contains(pontoFim))) {
                 Object[] row = {linha.getIdLinha(), linha.getPontoInicial(), linha.getPontoFinal(), formatter.format(linha.getHorario())};
                 modelo.addRow(row);
             }
