@@ -4,11 +4,15 @@ import classes.Funcionario;
 import classes.Linha;
 import classes.Usuario;
 import classes.Veiculo;
+import com.itextpdf.text.DocumentException;
 import io.Gravador;
 import io.LeitorGravadorObj;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objetos.ObjetoFuncionario;
 import objetos.ObjetoUsuario;
 import operacoes.CriaPDFUsuario;
@@ -365,9 +369,9 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-       
+
     private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
-        ObjetoUsuario usuario =  new ObjetoUsuario();
+        ObjetoUsuario usuario = new ObjetoUsuario();
         usuario.setUsuarios(usuarios);
         Gravador.gravarObjeto(new LeitorGravadorObj(), usuario, "./dados/usuarios.txt");
         ObjetoFuncionario funcionario = new ObjetoFuncionario();
@@ -377,7 +381,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadUsuarioActionPerformed
-       new CadastroUsuario(this.usuarios, this.estadosCidades, this.usuario);
+        new CadastroUsuario(this.usuarios, this.estadosCidades, this.usuario);
     }//GEN-LAST:event_bCadUsuarioActionPerformed
 
     private void bCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadFuncActionPerformed
@@ -409,10 +413,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bCadVeiculoActionPerformed
 
     private void bRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioUsuarioActionPerformed
-        String[] arq = null;
-        
-        // TODO add your handling code here:
-        CriaPDFUsuario.main(arq);
+        try {
+            // TODO add your handling code here:
+            CriaPDFUsuario.gerarPDF(this.usuarios);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bRelatorioUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
