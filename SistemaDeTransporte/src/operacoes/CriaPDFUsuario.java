@@ -9,12 +9,14 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import static com.itextpdf.text.Font.BOLD;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
-import static java.awt.Font.BOLD;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,13 +32,13 @@ public class CriaPDFUsuario {
 
     private static PdfPTable criarCabecalho() throws DocumentException {
         PdfPTable table = new PdfPTable(4);
-        PdfPCell celulaID = new PdfPCell(new Phrase(BOLD,"ID"));
+        PdfPCell celulaID = new PdfPCell(new Phrase(12F,"Número",FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12F)));
         celulaID.setHorizontalAlignment(Element.ALIGN_CENTER);
-        PdfPCell celulaCPF = new PdfPCell(new Phrase(BOLD,"CPF"));
+        PdfPCell celulaCPF = new PdfPCell(new Phrase(12F,"CPF",FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12F)));
         celulaCPF.setHorizontalAlignment(Element.ALIGN_CENTER);
-        PdfPCell celulaNome = new PdfPCell(new Phrase(BOLD,"Nome"));
+        PdfPCell celulaNome = new PdfPCell(new Phrase(12F,"Nome",FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12F)));
         celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
-        PdfPCell celulaTipo = new PdfPCell(new Phrase(BOLD,"Tipo"));
+        PdfPCell celulaTipo = new PdfPCell(new Phrase(12F,"Tipo",FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12F)));
         celulaTipo.setHorizontalAlignment(Element.ALIGN_CENTER);
 
         table.addCell(celulaID);
@@ -57,19 +59,26 @@ public class CriaPDFUsuario {
             ArrayList<Usuario> rows = usuarios;
             for (i = 0; i < rows.size(); i++) {
                 Usuario rowFat = rows.get(i);
-                PdfPCell celula1 = new PdfPCell(new Phrase(rowFat.getIdUser()));
+                PdfPCell celula1 = new PdfPCell(new Phrase(""+(i+1)));
+                celula1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula2 = new PdfPCell(new Phrase(rowFat.getCpf()));
                 PdfPCell celula3 = new PdfPCell(new Phrase(rowFat.getNome()));
-                celula2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                celula2.setHorizontalAlignment(Element.ALIGN_CENTER);
                 PdfPCell celula4 = new PdfPCell(new Phrase(rowFat.getTipo()));
                 table.addCell(celula1);
                 table.addCell(celula2);
                 table.addCell(celula3);
                 table.addCell(celula4);
             }
-            PdfPTable total = new PdfPTable(1);
-            PdfPCell celulaTotal = new PdfPCell(new Phrase(BOLD, "Quantidade de usuarios:" + i));
+            Date data = new Date();
+            PdfPTable total = new PdfPTable(2);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            PdfPCell celulaTotal = new PdfPCell(new Phrase(BOLD, "Quantidade de usuarios: " + i));
+            PdfPCell celulaData = new PdfPCell(new Phrase("Data: "+formatter.format(data)));
+            celulaData.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celulaTotal.setHorizontalAlignment(Element.ALIGN_CENTER);
             total.addCell(celulaTotal);
+            total.addCell(celulaData);
             document.add(table);
             document.add(total);
 
@@ -95,7 +104,11 @@ public class CriaPDFUsuario {
         a informada para gerar o relatório, caso sim é chamado o método que preencher o relatório com as informaçÕes do determinado faturamento
         daquele dia.*/
         document.open();
-
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        Paragraph pTitulo = new Paragraph(new Phrase(20F , "Relatorio de Usuário - "+formatter.format(data)+"\n\n", FontFactory.getFont(FontFactory.HELVETICA, 18F)));
+        pTitulo.setAlignment(Element.ALIGN_CENTER);
+        document.add( pTitulo );
         PdfPTable table = CriaPDFUsuario.criarCabecalho();
         CriaPDFUsuario.preencherTabela(document, table, usuarios);
 
