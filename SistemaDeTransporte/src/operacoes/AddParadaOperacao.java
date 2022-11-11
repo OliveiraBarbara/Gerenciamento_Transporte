@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class AddParadaOperacao {
     public static void addParada(ArrayList<Paradas> paradas, String endereco, String pontoParada, String horario) throws ParseException{
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         Paradas parada = new Paradas(endereco, pontoParada, formatter.parse(horario));
         paradas.add(parada);
     }

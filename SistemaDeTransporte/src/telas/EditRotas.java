@@ -1,6 +1,7 @@
 package telas;
 
 import classes.Linha;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -125,10 +126,26 @@ public class EditRotas extends javax.swing.JFrame {
                 tPontoFimActionPerformed(evt);
             }
         });
+        tPontoFim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tPontoFimKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tPontoFimKeyReleased(evt);
+            }
+        });
 
         tPontoIni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tPontoIniActionPerformed(evt);
+            }
+        });
+        tPontoIni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tPontoIniKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tPontoIniKeyReleased(evt);
             }
         });
 
@@ -268,6 +285,24 @@ public class EditRotas extends javax.swing.JFrame {
         carregarDados();
     }//GEN-LAST:event_tPontoFimActionPerformed
 
+    private void tPontoIniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPontoIniKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tPontoIniKeyPressed
+
+    private void tPontoFimKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPontoFimKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tPontoFimKeyPressed
+
+    private void tPontoIniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPontoIniKeyReleased
+        // TODO add your handling code here:
+        carregarDados();
+    }//GEN-LAST:event_tPontoIniKeyReleased
+
+    private void tPontoFimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPontoFimKeyReleased
+        // TODO add your handling code here:
+        carregarDados();
+    }//GEN-LAST:event_tPontoFimKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEditar;
     private javax.swing.JButton bFechar;
@@ -294,11 +329,12 @@ public class EditRotas extends javax.swing.JFrame {
         String pontoIni = this.tPontoIni.getText().toLowerCase();
         String pontoFim = this.tPontoFim.getText().toLowerCase();
         System.out.println(this.linhas.isEmpty());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         for (Linha linha : this.linhas) {
             
             if ((pontoIni.isEmpty() || linha.getPontoInicial().toLowerCase().contains(pontoIni))
                     && (pontoFim.isEmpty()|| linha.getPontoFinal().contains(pontoFim))) {
-                Object[] row = {linha.getIdLinha(), linha.getPontoInicial(), linha.getPontoFinal(), linha.getHorario()};
+                Object[] row = {linha.getIdLinha(), linha.getPontoInicial(), linha.getPontoFinal(), formatter.format(linha.getHorario())};
                 modelo.addRow(row);
             }
         }
