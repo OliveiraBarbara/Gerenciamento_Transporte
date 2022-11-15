@@ -16,7 +16,9 @@ import java.util.logging.Logger;
 import objetos.ObjetoFuncionario;
 import objetos.ObjetoUsuario;
 import operacoes.CriaPDFFuncionario;
+import operacoes.CriaPDFRotas;
 import operacoes.CriaPDFUsuario;
+import operacoes.CriaPDFVeiculo;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -206,11 +208,21 @@ public class Menu extends javax.swing.JFrame {
         bRelatorioRotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/rota.png"))); // NOI18N
         bRelatorioRotas.setText("Rotas");
         bRelatorioRotas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bRelatorioRotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRelatorioRotasActionPerformed(evt);
+            }
+        });
 
         bRelatorioVeiculo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/veiculos.png"))); // NOI18N
         bRelatorioVeiculo.setText("Veículos");
         bRelatorioVeiculo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bRelatorioVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRelatorioVeiculoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelRelatorioLayout = new javax.swing.GroupLayout(painelRelatorio);
         painelRelatorio.setLayout(painelRelatorioLayout);
@@ -439,6 +451,28 @@ public class Menu extends javax.swing.JFrame {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bRelatorioFuncActionPerformed
+
+    private void bRelatorioVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioVeiculoActionPerformed
+        try {
+            // TODO add your handling code here:
+            CriaPDFVeiculo.gerarPDF(veiculos);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bRelatorioVeiculoActionPerformed
+
+    private void bRelatorioRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioRotasActionPerformed
+        try {
+            // TODO add your handling code here:
+            CriaPDFRotas.gerarPDF(linhas);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bRelatorioRotasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadFunc;
