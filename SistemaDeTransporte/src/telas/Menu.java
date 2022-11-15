@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetos.ObjetoFuncionario;
 import objetos.ObjetoUsuario;
+import operacoes.CriaPDFFuncionario;
 import operacoes.CriaPDFUsuario;
 
 public class Menu extends javax.swing.JFrame {
@@ -185,6 +186,11 @@ public class Menu extends javax.swing.JFrame {
         bRelatorioFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/carteira-de-identidade.png"))); // NOI18N
         bRelatorioFunc.setText("Funcionários");
         bRelatorioFunc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bRelatorioFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRelatorioFuncActionPerformed(evt);
+            }
+        });
 
         bRelatorioUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bRelatorioUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pessoas.png"))); // NOI18N
@@ -422,6 +428,17 @@ public class Menu extends javax.swing.JFrame {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bRelatorioUsuarioActionPerformed
+
+    private void bRelatorioFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioFuncActionPerformed
+        try {
+            // TODO add your handling code here:
+            CriaPDFFuncionario.gerarPDF(funcionarios);
+        } catch (DocumentException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bRelatorioFuncActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadFunc;
