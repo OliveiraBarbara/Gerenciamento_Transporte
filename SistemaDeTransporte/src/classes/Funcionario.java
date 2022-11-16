@@ -25,8 +25,10 @@ public class Funcionario implements Serializable {
     private String cep;
     private String cidade;
     private String uf;
+    private String usuario;
+    private String senha;
 
-    public Funcionario(String cpf, String cargo, String nome, double salario, String telefone, String endereco, int num, String bairro, String cep, String cidade, String uf) {
+    public Funcionario(String cpf, String cargo, String nome, double salario, String telefone, String endereco, int num, String bairro, String cep, String cidade, String uf, String usuario, String senha) {
         UUID uuid = UUID.randomUUID();
         this.idFunc = uuid.toString();
         this.cpf = cpf;
@@ -40,6 +42,8 @@ public class Funcionario implements Serializable {
         this.cep = cep;
         this.cidade = cidade;
         this.uf = uf;
+        this.usuario = usuario;
+        this.senha = senha;
     }
 
     public String getIdFunc() {
