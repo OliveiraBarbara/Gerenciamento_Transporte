@@ -8,9 +8,13 @@ import classes.Funcionario;
 import classes.Linha;
 import classes.Usuario;
 import classes.Veiculo;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
+import javax.swing.JOptionPane;
+import javax.swing.border.BevelBorder;
+import operacoes.BuscaFuncionario;
 
 /**
  *
@@ -35,7 +39,7 @@ public class Login extends javax.swing.JFrame {
         this.veiculos = veiculos;
         this.linhas = linhas;
         this.estadosCidades = estadosCidades;
-        
+
     }
 
     /**
@@ -49,7 +53,6 @@ public class Login extends javax.swing.JFrame {
 
         Icone = new javax.swing.JPanel();
         tLogin = new javax.swing.JTextField();
-        tSenha = new javax.swing.JTextField();
         lLogin = new javax.swing.JLabel();
         lSenha = new javax.swing.JLabel();
         bAcessar = new javax.swing.JButton();
@@ -57,6 +60,7 @@ public class Login extends javax.swing.JFrame {
         lbIcone = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        tSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Transporte");
@@ -108,7 +112,7 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(tLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(IconeLayout.createSequentialGroup()
                                 .addComponent(lSenha)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(17, Short.MAX_VALUE))
                     .addGroup(IconeLayout.createSequentialGroup()
@@ -141,8 +145,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(lLogin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(IconeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lSenha))
+                    .addComponent(lSenha)
+                    .addComponent(tSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(IconeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSair, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +173,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bSairActionPerformed
 
     private void bAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAcessarActionPerformed
-        new Menu(this.usuarios, this.funcionarios, this.veiculos, this.linhas, this.estadosCidades);
+        Funcionario funcionario = BuscaFuncionario.buscarFuncionario(funcionarios, tLogin.getText(), String.valueOf(tSenha.getPassword()));
+        if(funcionario == null){
+            JOptionPane.showConfirmDialog(null, "Login ou senha invalidos!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            tLogin.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.red,Color.red));
+            tSenha.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.red,Color.red));
+        }else{
+            new Menu(this.usuarios, this.funcionarios, this.veiculos, this.linhas, this.estadosCidades, funcionario);
+        }
+       
+
+
     }//GEN-LAST:event_bAcessarActionPerformed
 
     /**
@@ -186,6 +200,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lSenha;
     private javax.swing.JLabel lbIcone;
     private javax.swing.JTextField tLogin;
-    private javax.swing.JTextField tSenha;
+    private javax.swing.JPasswordField tSenha;
     // End of variables declaration//GEN-END:variables
 }

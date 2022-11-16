@@ -28,6 +28,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         this.estadosCidades = estadosCidades;
         this.funcionarios = funcionarios;
         this.funcionario = funcionario;
+        this.jTextField1.setEnabled(true);
 
         if (this.funcionario != null) {
             this.carregarDados();
@@ -46,7 +47,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         tEnd = new javax.swing.JTextField();
         lNumero = new javax.swing.JLabel();
         lBarirro = new javax.swing.JLabel();
-        tBairro = new javax.swing.JTextField();
         lComplemento = new javax.swing.JLabel();
         lCep = new javax.swing.JLabel();
         lFone = new javax.swing.JLabel();
@@ -76,10 +76,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         tSetor = new javax.swing.JFormattedTextField();
         lSalario = new javax.swing.JLabel();
         tSalario = new javax.swing.JTextField();
-        tUsuario = new javax.swing.JTextField();
         lBarirro6 = new javax.swing.JLabel();
         lBarirro7 = new javax.swing.JLabel();
         tpSenha = new javax.swing.JPasswordField();
+        tBairro1 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Transporte");
@@ -202,8 +203,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         lSalario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lSalario.setText("Salário:");
 
-        tUsuario.setEnabled(false);
-
         lBarirro6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lBarirro6.setText("Usuario:");
 
@@ -226,7 +225,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lBarirro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(lCep)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -272,18 +271,18 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                         .addGap(0, 20, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lBarirro6)
-                        .addGap(9, 9, 9)
-                        .addComponent(tUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(lBarirro7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 271, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(bCadastrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lBarirro7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -328,7 +327,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lBarirro)
-                    .addComponent(tBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lCep)
                     .addComponent(tCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lComplemento)
@@ -336,7 +334,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addComponent(lUf)
                     .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lFone)
-                    .addComponent(tFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tBairro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCnh)
@@ -353,21 +352,22 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addComponent(tTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lBarirro4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 27, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(bFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lBarirro7)
-                            .addComponent(tUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lBarirro6)
-                            .addComponent(tpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lBarirro7)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -411,9 +411,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         String especialidade = this.tEspecialidade.getText();
         String local = this.tLocal.getText();
         String endereco = this.tEnd.getText();
-        String bairro = this.tBairro.getText();
+        String bairro = this.jTextField1.getText();
         String cep = this.tCep.getText();
-        String usuario = this.tUsuario.getText();
+        String usuario = this.jTextField1.getText();
         String senha = String.valueOf(this.tpSenha.getPassword());
 
         if (funcionario == null) {
@@ -496,7 +496,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         tEnd.setText(this.funcionario.getEndereco());
         tNumero.setText("" + this.funcionario.getNum());
-        tBairro.setText(this.funcionario.getBairro());
+        jTextField1.setText(this.funcionario.getBairro());
         tCep.setText(this.funcionario.getCep());
         cbUF.getModel().setSelectedItem(this.funcionario.getUf());
         cbCidade.getModel().setSelectedItem(this.funcionario.getCidade());
@@ -525,6 +525,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbUF;
     private javax.swing.JLabel hLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lBarirro;
     private javax.swing.JLabel lBarirro2;
     private javax.swing.JLabel lBarirro3;
@@ -543,7 +544,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel lNumero;
     private javax.swing.JLabel lSalario;
     private javax.swing.JLabel lUf;
-    private javax.swing.JTextField tBairro;
+    private javax.swing.JTextField tBairro1;
     private javax.swing.JFormattedTextField tCPF;
     private javax.swing.JFormattedTextField tCep;
     private javax.swing.JTextField tCnh;
@@ -556,7 +557,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField tSalario;
     private javax.swing.JFormattedTextField tSetor;
     private javax.swing.JTextField tTurno;
-    private javax.swing.JTextField tUsuario;
     private javax.swing.JPasswordField tpSenha;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,18 +28,30 @@ public class Menu extends javax.swing.JFrame {
     private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
     private Funcionario funcionario;
+    private Funcionario funcionarioLogado;
     private Usuario usuario;
     private Veiculo veiculo;
 
-    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
+    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades, Funcionario funcionario) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.usuarios = usuarios;
+        this.funcionarioLogado = funcionario;
         this.estadosCidades = estadosCidades;
         this.funcionarios = funcionarios;
         this.linhas = linhas;
         this.veiculos = veiculos;
+        if(!funcionarioLogado.getCargo().toLowerCase().equals("gerente")){
+            this.bCadFunc.setEnabled(false);
+            this.bCadRotas.setEnabled(false);
+            this.bCadUsuario.setEnabled(false);
+            this.bCadVeiculo.setEnabled(false);
+            this.bEdFunc.setEnabled(false);
+            this.bEdRotas.setEnabled(false);
+            this.bEdUsuario.setEnabled(false);
+            this.bEdVeiculo.setEnabled(false);
+        }
     }
 
     @SuppressWarnings("unchecked")

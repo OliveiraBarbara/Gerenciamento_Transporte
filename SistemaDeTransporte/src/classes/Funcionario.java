@@ -54,6 +54,22 @@ public class Funcionario implements Serializable {
         return endereco;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }

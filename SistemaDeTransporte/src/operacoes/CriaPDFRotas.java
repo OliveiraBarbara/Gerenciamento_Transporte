@@ -75,7 +75,7 @@ public class CriaPDFRotas {
             Date data = new Date();
             PdfPTable total = new PdfPTable(1);
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            PdfPCell celulaData = new PdfPCell(new Phrase("Data: "+formatter.format(data)));
+            PdfPCell celulaData = new PdfPCell(new Phrase("Data de Atualização: "+formatter.format(data)));
             celulaData.setHorizontalAlignment(Element.ALIGN_CENTER);
             total.addCell(celulaData);
             Paragraph pTitulo = new Paragraph(new Phrase(20F,"\n\n", FontFactory.getFont(FontFactory.HELVETICA, 18F)));
