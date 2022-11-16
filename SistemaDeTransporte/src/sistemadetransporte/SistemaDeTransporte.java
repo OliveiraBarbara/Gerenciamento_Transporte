@@ -4,6 +4,7 @@
  */
 package sistemadetransporte;
 
+import classes.Configuracao;
 import classes.Funcionario;
 import classes.Linha;
 import classes.Usuario;
@@ -29,6 +30,10 @@ public class SistemaDeTransporte {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Configuracao config = (Configuracao) Carregador.carregarObjeto(new LeitorGravadorObj(), "./dados/config.txt");
+        if(config == null){
+            config = new Configuracao();
+        }
         ObjetoUsuario usuarios = (ObjetoUsuario) Carregador.carregarObjeto(new LeitorGravadorObj(), "./dados/usuarios.txt");
         if(usuarios == null){
             usuarios = new ObjetoUsuario();
@@ -46,15 +51,15 @@ public class SistemaDeTransporte {
             linhas = new ObjetoLinha();
         }
         HashMap<String, TreeSet<String>> estadosCidades = Carregador.carregarEstadosCidades(new LeitorGravadorObj());
-        criarGUI(usuarios.getUsuarios(), funcionarios.getFuncionarios(), veiculos.getVeiculos(), linhas.getLinhas(), estadosCidades);
+        criarGUI(usuarios.getUsuarios(), funcionarios.getFuncionarios(), veiculos.getVeiculos(), linhas.getLinhas(), estadosCidades,config);
     }
 
-    public static void criarGUI(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
+    public static void criarGUI(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades, Configuracao config) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(usuarios, funcionarios, veiculos, linhas, estadosCidades).setVisible(true);
+                new Login(usuarios, funcionarios, veiculos, linhas, estadosCidades, config).setVisible(true);
             }
         });
     }

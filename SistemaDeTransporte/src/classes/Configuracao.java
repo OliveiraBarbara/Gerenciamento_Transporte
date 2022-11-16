@@ -15,10 +15,10 @@ public class Configuracao implements Serializable{
     private double valorTrem;
     private double valorMetro;
 
-    public Configuracao(double valorOnibus, double valorTrem, double valorMetro) {
-        this.valorOnibus = valorOnibus;
-        this.valorTrem = valorTrem;
-        this.valorMetro = valorMetro;
+    public Configuracao() {
+        this.valorOnibus = 0.00;
+        this.valorTrem = 0.00;
+        this.valorMetro = 0.00;
     }
 
     public double getValorOnibus() {

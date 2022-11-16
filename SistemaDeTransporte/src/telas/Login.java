@@ -4,6 +4,7 @@
  */
 package telas;
 
+import classes.Configuracao;
 import classes.Funcionario;
 import classes.Linha;
 import classes.Usuario;
@@ -27,11 +28,12 @@ public class Login extends javax.swing.JFrame {
     private ArrayList<Veiculo> veiculos;
     private ArrayList<Linha> linhas;
     private HashMap<String, TreeSet<String>> estadosCidades;
+    private Configuracao config;
 
     /**
      * Creates new form Login
      */
-    public Login(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades) {
+    public Login(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades, Configuracao config) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.usuarios = usuarios;
@@ -39,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         this.veiculos = veiculos;
         this.linhas = linhas;
         this.estadosCidades = estadosCidades;
-
+        this.config = config;
     }
 
     /**
@@ -179,7 +181,7 @@ public class Login extends javax.swing.JFrame {
             tLogin.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.red,Color.red));
             tSenha.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.red,Color.red));
         }else{
-            new Menu(this.usuarios, this.funcionarios, this.veiculos, this.linhas, this.estadosCidades, funcionario);
+            new Menu(this.usuarios, this.funcionarios, this.veiculos, this.linhas, this.estadosCidades, funcionario, this.config);
         }
        
 

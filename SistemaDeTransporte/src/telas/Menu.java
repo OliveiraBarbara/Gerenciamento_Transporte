@@ -1,5 +1,6 @@
 package telas;
 
+import classes.Configuracao;
 import classes.Funcionario;
 import classes.Linha;
 import classes.Usuario;
@@ -31,8 +32,9 @@ public class Menu extends javax.swing.JFrame {
     private Funcionario funcionarioLogado;
     private Usuario usuario;
     private Veiculo veiculo;
+    private Configuracao config;
 
-    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades, Funcionario funcionario) {
+    public Menu(ArrayList<Usuario> usuarios, ArrayList<Funcionario> funcionarios, ArrayList<Veiculo> veiculos, ArrayList<Linha> linhas, HashMap<String, TreeSet<String>> estadosCidades, Funcionario funcionario, Configuracao config) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -42,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         this.funcionarios = funcionarios;
         this.linhas = linhas;
         this.veiculos = veiculos;
+        this.config = config;
         if(!funcionarioLogado.getCargo().toLowerCase().equals("gerente")){
             this.bCadFunc.setEnabled(false);
             this.bCadRotas.setEnabled(false);
@@ -78,6 +81,7 @@ public class Menu extends javax.swing.JFrame {
         painelVeiculo = new javax.swing.JPanel();
         bEdVeiculo = new javax.swing.JButton();
         bCadVeiculo = new javax.swing.JButton();
+        bConfiguracao = new javax.swing.JToggleButton();
 
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -351,6 +355,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        bConfiguracao.setText("Configuração");
+        bConfiguracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfiguracaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -373,7 +384,9 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(273, 273, 273)
                         .addComponent(bSair, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
+                        .addGap(21, 21, 21)
+                        .addComponent(bConfiguracao)
+                        .addGap(44, 44, 44)
                         .addComponent(lSistema)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -381,8 +394,12 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lSistema)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lSistema)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(bConfiguracao)))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(painelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelRotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -486,11 +503,17 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bRelatorioRotasActionPerformed
 
+    private void bConfiguracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfiguracaoActionPerformed
+        // TODO add your handling code here:
+        new Config(this.config).setVisible(true);
+    }//GEN-LAST:event_bConfiguracaoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadFunc;
     private javax.swing.JButton bCadRotas;
     private javax.swing.JButton bCadUsuario;
     private javax.swing.JButton bCadVeiculo;
+    private javax.swing.JToggleButton bConfiguracao;
     private javax.swing.JButton bEdFunc;
     private javax.swing.JButton bEdRotas;
     private javax.swing.JButton bEdUsuario;
