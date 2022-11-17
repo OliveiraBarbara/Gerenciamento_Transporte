@@ -4,6 +4,7 @@ import classes.Funcionario;
 import classes.Gerente;
 import classes.Motorista;
 import classes.Secretaria;
+import interfaces.IAtualizarFrame;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 import operacoes.CadastroFuncionarioOperacao;
 import operacoes.CarregarDados;
 
-public class CadastroFuncionario extends javax.swing.JFrame {
+public class CadastroFuncionario extends javax.swing.JFrame implements IAtualizarFrame {
 
     private ArrayList<Funcionario> funcionarios;
     private HashMap<String, TreeSet<String>> estadosCidades;
@@ -419,7 +420,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         if (funcionario == null) {
             try {
-                CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, cpf, cargo, nome, salario, telefone, setor, cnh, turno, especialidade, local, endereco, num, bairro, cep, cidade, estado,usuario,senha);
+                CadastroFuncionarioOperacao.cadastroFuncionario(this.funcionarios, cpf, cargo, nome, salario, telefone, setor, cnh, turno, especialidade, local, endereco, num, bairro, cep, cidade, estado, usuario, senha);
             } catch (ParseException ex) {
                 Logger.getLogger(CadastroFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -451,7 +452,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(null, "Dados Atualizados com Sucesso!", "Sucesso!", JOptionPane.DEFAULT_OPTION);
         }
 
-        this.dispose();
+        atualizarFrame(funcionario);
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFecharActionPerformed
@@ -560,4 +561,10 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField tTurno;
     private javax.swing.JPasswordField tpSenha;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void atualizarFrame(Funcionario funcionario) {
+        this.funcionarios.add(funcionario);
+        this.carregarDados();
+    }
 }

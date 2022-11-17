@@ -4,6 +4,7 @@ import classes.Comum;
 import classes.Estudante;
 import classes.Idoso;
 import classes.Usuario;
+import interfaces.UsuarioInterface;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
 import operacoes.CadastroUsuarioOperacao;
 import operacoes.CarregarDados;
 
-public class CadastroUsuario extends javax.swing.JFrame {
+public class CadastroUsuario extends javax.swing.JFrame implements UsuarioInterface {
 
     private ArrayList<Usuario> usuarios;
     private HashMap<String, TreeSet<String>> estadosCidades;
@@ -483,4 +484,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tNumero;
     private javax.swing.JTextField tValeTransporte;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void atualizarFrame(Usuario usuario) {
+        this.usuarios.add(usuario);
+        carregarDados();
+    }
 }

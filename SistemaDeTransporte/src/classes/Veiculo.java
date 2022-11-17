@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @author barbara
  */
-public class Veiculo implements VeiculoInterface, Serializable, Comparable<Veiculo> {
+public class Veiculo implements Serializable, Comparable<Veiculo> {
 
     private String id;
     private String tipo;
@@ -84,11 +84,6 @@ public class Veiculo implements VeiculoInterface, Serializable, Comparable<Veicu
 
     public void setAquisicao(Date aquisicao) {
         this.aquisicao = aquisicao;
-    }
-
-    @Override
-    public void calculaTempoMedio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

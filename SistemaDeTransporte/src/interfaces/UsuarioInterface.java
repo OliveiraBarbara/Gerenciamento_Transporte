@@ -12,5 +12,5 @@ import classes.Usuario;
  */
 public interface UsuarioInterface {
 
-    public void calculaDesconto();
+   abstract public void atualizarFrame(Usuario usuario);
 }

@@ -4,11 +4,13 @@
  */
 package interfaces;
 
+import classes.Veiculo;
+
 /**
  *
  * @author Vini_
  */
 public interface VeiculoInterface {
 
-    public void calculaTempoMedio();
+    abstract public void atualizarFrame(Veiculo Veiculo);
 }
