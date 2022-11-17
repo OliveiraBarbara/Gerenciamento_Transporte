@@ -8,6 +8,7 @@ import classes.Metro;
 import classes.Onibus;
 import classes.Trem;
 import classes.Veiculo;
+import execoes.validacao.ValidacaoException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -307,7 +308,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         if (veiculo == null) {
             try {
-                CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, data, capacidade, numSeguro, integracao, regioes, bairros, tipo, modelo, placa, acessivel);
+                CadastroVeiculoOperacao.cadastroVeiculo(this.veiculos, data, capacidade, numSeguro, integracao, regioes, bairros, tipo, modelo, placa, acessivel,this.tPlaca);
             } catch (ParseException ex) {
                 Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
