@@ -12,5 +12,5 @@ import classes.Usuario;
  */
 public interface UsuarioInterface {
 
-    public void calculaDesconto(Usuario usuario);
+    public void calculaDesconto();
 }

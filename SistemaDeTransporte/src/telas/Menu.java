@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import objetos.ObjetoFuncionario;
 import objetos.ObjetoUsuario;
+import operacoes.CalculaDesconto;
 import operacoes.CriaPDFFuncionario;
 import operacoes.CriaPDFRotas;
 import operacoes.CriaPDFUsuario;
@@ -462,7 +463,7 @@ public class Menu extends javax.swing.JFrame {
     private void bRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelatorioUsuarioActionPerformed
         try {
             // TODO add your handling code here:
-            CriaPDFUsuario.gerarPDF(this.usuarios);
+            CriaPDFUsuario.gerarPDF(this.usuarios, this.config);
         } catch (DocumentException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

@@ -12,7 +12,7 @@ import java.util.UUID;
  *
  * @author Vini_
  */
-public class Usuario implements UsuarioInterface, Serializable {
+public class Usuario implements UsuarioInterface,Serializable {
 
     private String idUser;
     private String cpf;
@@ -126,7 +126,7 @@ public class Usuario implements UsuarioInterface, Serializable {
     }
 
     @Override
-    public void calculaDesconto(Usuario usuario) {
+    public void calculaDesconto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
